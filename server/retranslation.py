@@ -14,14 +14,14 @@ class RetranslationJobs:
     def __init__(self):
         self.tasks = {}
 
-    def create(self, store, client, source):
+    def create(self, store, client, source, settings=None):
         if source.get('retranslation', {}).get('status') == 'running':
             raise StateError('请暂停当前全文重译后再创建其他重译版本。')
         # Strict export validates English baseline; drafts cannot silently vanish.
         if any(p.get('draftZh', '') != p.get('zh', '') for p in source['paragraphs'] if not p['deleted']):
             raise StateError('请先完成或撤销中文草稿，再从当前英文创建重译版本。')
         data = store.export(source)
-        settings = deepcopy(client.read_settings())
+        settings = deepcopy(settings if settings is not None else client.read_settings())
         provider, profile = client.resolve(settings, 'translate_align')
         settings['translation'] = public_translation(settings)
         for item in settings.get('providers', []):

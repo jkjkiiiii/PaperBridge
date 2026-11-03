@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Show recorded translation provenance and planned translation/mapping services before full-document retranslation; display version-specific provenance and reject stale confirmation plans when source/settings change.
+
+
 - Replace whole-paragraph PDF text lookup with stable Word-exported paragraph/run bookmarks in disposable previews; distinguish text overlays from native position markers for formulas/images and ambiguous text.
 - Verify the full Attention retranslation: all 387 nonempty paragraphs have native locations in both languages; empty paragraphs remain noninteractive. Native bookmarks preserve all 15 English and 14 Chinese page rasters pixel-for-pixel in this sample.
 - Align hover navigation to matching sentence rectangles, preserve paragraph hit areas, and avoid forcing both panes into structural mode when only one side lacks a location.

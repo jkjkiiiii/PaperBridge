@@ -72,7 +72,10 @@ type Paragraph = {
   skipReason?: string;
 };
 type LayoutNode = { type: "paragraph"; id: string; style?: React.CSSProperties } | { type: "table"; id?: string; columnWidths?: number[]; rows: { cells: { omitted?: boolean; colSpan?: number; rowSpan?: number; style?: React.CSSProperties; blocks: LayoutNode[] }[] }[] };
+type TranslationProvenance = {translationLabel:string;alignmentLabel?:string;status?:string;planned?:{translationLabel:string;alignmentLabel:string}};
+type RetranslationPlan = {current:TranslationProvenance;next:TranslationProvenance;planToken:string};
 type Project = {
+  translationProvenance?:TranslationProvenance;
   retranslation?: {status:string;total:number;completed:number;failed:number;skipped?:number;model:string;error?:string;stopRequested?:boolean};
   layout?: LayoutNode[];
   id: string;
@@ -191,6 +194,8 @@ function App() {
   const [settings, setSettings] = useState<Config | null>(null),
     [settingsOpen, setSettingsOpen] = useState(false);
   const [nativeView, setNativeView] = useState(true);
+  const [translationSource,setTranslationSource]=useState<TranslationProvenance>();
+  useEffect(()=>{let cancelled=false;setTranslationSource(undefined);if(project)void api<TranslationProvenance>(`/projects/${project.id}/translation-provenance`).then(value=>{if(!cancelled)setTranslationSource(value)}).catch(()=>{});return ()=>{cancelled=true}},[project?.id,project?.revision,project?.retranslation?.status]);
   const [navigation,setNavigation]=useState<{id:string;serial:number}>();
   const [diff, setDiff] = useState(false),
     [colors, setColors] = useState(false),
@@ -454,8 +459,21 @@ function App() {
       if (source.paragraphs.some(p => !p.deleted && (!["ready", "untranslated"].includes(p.status) || p.draftZh !== p.zh))) {
         throw Error("请先完成、重试或撤销待回写内容，再重新翻译全文。");
       }
-      if (!window.confirm("将使用当前已同步的英文创建新的重译版本，按当前选择的翻译服务生成全文中文，再用通用模型重建句子映射。原项目、译文和编辑记录保留。是否开始？")) return;
-      const next = await api<Project>(`/projects/${sourceId}/retranslate`, {});
+      const plan = await api<RetranslationPlan>(`/projects/${sourceId}/retranslate-plan`);
+      const message = [
+        "当前显示的译文来源：",
+        `翻译：${plan.current.translationLabel}`,
+        `句子映射：${plan.current.alignmentLabel || "历史记录未提供"}`,
+        "",
+        "本次重新翻译将使用：",
+        `翻译：${plan.next.translationLabel}`,
+        `句子映射：${plan.next.alignmentLabel || "由翻译模型联合建立"}`,
+        "",
+        "将从当前已同步英文创建新版本，重新生成全文中文及句子映射。原项目、译文和编辑记录保留。",
+        "是否确定重新翻译？",
+      ].join("\n");
+      if (!window.confirm(message)) return;
+      const next = await api<Project>(`/projects/${sourceId}/retranslate`, {planToken:plan.planToken});
       setProject(next); projectRef.current = next;
       setDrafts({}); draftRef.current = {}; setEditing(""); setSelection(null); setHover(null);
       setActive(next.paragraphs[0]?.id || ""); refresh();
@@ -1356,6 +1374,11 @@ function App() {
                 </label>
               </div>
             </div>
+            {translationSource && <div className="translation-provenance" role="status">
+              <span>当前译文 · {translationSource.translationLabel}</span>
+              {translationSource.alignmentLabel && <span>句子映射 · {translationSource.alignmentLabel}</span>}
+              {translationSource.planned && <span>本版本任务配置 · {translationSource.planned.translationLabel}；映射：{translationSource.planned.alignmentLabel}</span>}
+            </div>}
             {project.retranslation && <div className="retranslation-progress" role="status">
               <strong>全文重译 · {project.retranslation.status === "running" ? (project.retranslation.stopRequested ? "完成当前段后暂停" : "翻译中") : project.retranslation.status === "stopping" ? "完成当前段后暂停" : project.retranslation.status === "completed" ? "已完成" : project.retranslation.status === "completed_with_errors" ? "已结束，部分段落需重试" : "已暂停／待处理"}</strong>
               <span>{project.retranslation.completed} / {project.retranslation.total} 段 · {project.retranslation.skipped || 0} 段参考文献跳过 · {project.retranslation.failed} 段失败 · {project.retranslation.model}</span>

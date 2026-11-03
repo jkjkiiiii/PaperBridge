@@ -951,3 +951,5 @@ footer span {
 
 .reference-preserved small { display:block; font-size:11px; color:#728274; margin-bottom:5px; }
 .reference-preserved button { font-size:11px; margin-top:6px; }
+
+.translation-provenance{display:flex;flex-wrap:wrap;gap:6px 20px;padding:8px 24px;background:#edf4f1;color:#376559;font-size:12px;line-height:1.6;flex-shrink:0}

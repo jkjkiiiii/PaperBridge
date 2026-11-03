@@ -9,7 +9,7 @@ from pathlib import Path
 from uuid import uuid4
 from zipfile import BadZipFile
 from lxml.etree import XMLSyntaxError
-from fastapi import FastAPI, UploadFile, File, HTTPException, Request
+from fastapi import FastAPI, UploadFile, File, HTTPException, Request, Body
 from fastapi.responses import Response, FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from .documents import DocumentError, TOKEN, split_units, export_docx, build_chinese_preview
@@ -78,14 +78,35 @@ async def upload(file:UploadFile=File(...)):
     except (BadZipFile,XMLSyntaxError,KeyError) as exc:raise StateError('DOCX 压缩包或 XML 无效，请检查文件是否完整') from exc
 
 @app.get('/api/projects/{pid}')
-def project(pid:str): return store.get(pid)
+def project(pid:str):
+    from .translation_provenance import with_provenance
+    return with_provenance(store.get(pid),client)
+
+@app.get('/api/projects/{pid}/retranslate-plan')
+def retranslate_plan(pid:str):
+    from .translation_provenance import plan
+    source=store.get(pid);settings=client.read_settings()
+    return plan(source,client,settings,store.source(source))
+
+@app.get('/api/projects/{pid}/translation-provenance')
+def translation_provenance(pid:str):
+    from .translation_provenance import provenance
+    return provenance(store.get(pid),client)
 
 @app.post('/api/projects/{pid}/retranslate')
-async def retranslate(pid: str):
+async def retranslate(pid: str, body:dict | None=Body(default=None)):
+    from .translation_provenance import plan_token, with_provenance
+    import hmac
+    source=store.get(pid);settings=client.read_settings()
+    if body is not None and 'planToken' in body:
+        token=body['planToken']
+        expected=plan_token(source,settings,store.source(source))
+        if not isinstance(token,str) or not hmac.compare_digest(token,expected):
+            raise HTTPException(status_code=409,detail='翻译设置或文稿已变化，请重新查看重译方案并确认。')
     router = TranslationRouter(client, DATA)
-    project = retranslation_jobs.create(store, router, store.get(pid))
+    project = retranslation_jobs.create(store, router, source, settings=settings)
     retranslation_jobs.launch(store, router, project, translation_candidate, context_for)
-    return project
+    return with_provenance(project,client)
 
 @app.post('/api/projects/{pid}/retranslate/stop')
 async def stop_retranslation(pid: str):
