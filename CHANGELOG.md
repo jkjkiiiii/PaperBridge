@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- Add changed-paragraph navigation for English/Chinese edits, drafts and inserted/deleted paragraphs, with bidirectional jumps.
+- Add bilingual paragraph search with Ctrl+F, highlighted snippets and Enter / Shift+Enter navigation, including structural fallback for unmapped page regions.
+- Cache complete native-layout responses with bounded content-aware invalidation; serve existing PDF caches without waiting for cold Word jobs and publish newly rendered PDFs atomically.
+
+
 ### Word preview and documentation — 2026-11-04
 
 - Add red-deletion/green-insertion diff to English and Chinese native Word previews, using the same word-first English policy as structural editing.

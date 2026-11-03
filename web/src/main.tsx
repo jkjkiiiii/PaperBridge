@@ -29,6 +29,7 @@ import {
   Save,
 } from "lucide-react";
 import "./style.css";
+import { DocumentNavigator } from "./DocumentNavigator";
 import { NativePages } from "./NativePages";
 
 type Unit = { id: string; text: string; start: number; end: number };
@@ -190,6 +191,7 @@ function App() {
   const [settings, setSettings] = useState<Config | null>(null),
     [settingsOpen, setSettingsOpen] = useState(false);
   const [nativeView, setNativeView] = useState(true);
+  const [navigation,setNavigation]=useState<{id:string;serial:number}>();
   const [diff, setDiff] = useState(false),
     [colors, setColors] = useState(false),
     [original, setOriginal] = useState(false),
@@ -302,6 +304,7 @@ function App() {
     try {
       const p = await api<Project>("/projects/" + id);
       setProject(p);
+      setNavigation(undefined);
       setDrafts({});
       setSelection(null);
       setEditing("");
@@ -522,6 +525,7 @@ function App() {
     cancelPointerAlignment(true);
     scrollOwner.current = null;
     setActive(id);
+    setNavigation({id,serial:Date.now()});
     for (const pane of [left.current, right.current]) {
       const el = pane?.querySelector<HTMLElement>(`[data-block="${id}"]`);
       if (el && pane)
@@ -535,6 +539,15 @@ function App() {
         });
     }
   }
+  useEffect(()=>{
+    if(nativeView || !navigation)return;
+    const frame=requestAnimationFrame(()=>{
+      for(const pane of [left.current,right.current]){
+        const el=pane?.querySelector<HTMLElement>(`[data-block="${navigation.id}"]`);
+        if(el&&pane)pane.scrollTop+=el.getBoundingClientRect().top-pane.getBoundingClientRect().top-12;
+      }
+    });return ()=>cancelAnimationFrame(frame);
+  },[nativeView,navigation]);
   function isMapped(p: Paragraph) {
 
   return (
@@ -1348,6 +1361,7 @@ function App() {
               {["running", "stopping"].includes(project.retranslation.status) ? <button disabled={project.retranslation.status === "stopping" || project.retranslation.stopRequested} onClick={() => retranslationAction("stop")}>暂停后续</button> : project.retranslation.status !== "completed" && <button onClick={() => retranslationAction("resume")}>继续／重试未完成</button>}
               {project.retranslation.error && <span className="warning-text">{project.retranslation.error}</span>}
             </div>}
+            <DocumentNavigator key={project.id} paragraphs={project.paragraphs.map(p=>({...p,draftZh:drafts[p.id] ?? p.draftZh}))} active={active} onNavigate={locate}/>
             <div className="word-preview-links"><div className="native-mode-switch"><button className={nativeView ? "selected" : ""} onClick={() => setNativeView(true)}>Word 原生版面</button><button className={!nativeView ? "selected" : ""} onClick={() => setNativeView(false)}>结构编辑</button></div><a href={`/api/projects/${project.id}/preview?original=true`} target="_blank" rel="noreferrer">原稿版面 ↗</a><a href={`/api/projects/${project.id}/preview?original=false`} target="_blank" rel="noreferrer">当前英文版面 ↗</a><small>{nativeView ? "双侧 Word 排版 · 点击句子在中文原位编辑" : "结构视图 · 双击中文编辑"}</small></div>
             <div className="column-heads">
               <div>
@@ -1379,7 +1393,7 @@ function App() {
                     if (pointerSource.current?.side === source) schedulePointerAlignment(source);
                   }}
                 >
-                  {nativeView ? <NativePages diff={diff} stateKey={project.paragraphs.map(p=>`${p.id}:${p.revision}:${p.status}`).join("|")} projectId={project.id} revision={project.revision} original={side === "en" && original} language={side} active={active} editing={editing} highlighted={(selection || hover)?.pid || null} onSelect={(id) => {
+                  {nativeView ? <NativePages navigation={navigation} onUnmapped={()=>setNativeView(false)} diff={diff} stateKey={project.paragraphs.map(p=>`${p.id}:${p.revision}:${p.status}`).join("|")} projectId={project.id} revision={project.revision} original={side === "en" && original} language={side} active={active} editing={editing} highlighted={(selection || hover)?.pid || null} onSelect={(id) => {
                     scrollOwner.current = null; setActive(id); const p = project.paragraphs.find(p => p.id === id);
                     if (p && !p.deleted && p.status !== "untranslated" && p.translationPolicy !== "skip_reference") setEditing(id);
                   }} onHover={(id, unit) => {

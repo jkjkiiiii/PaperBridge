@@ -3,7 +3,7 @@ import './native-pages.css';
 type Rect=number[];
 type Region={paragraphId:string;rects:Rect[];units?:{id:string;rects:Rect[]}[];status?:string};
 type Layout={diff?:boolean;diffParagraphs?:string[];pendingParagraphs?:{id:string;status:string;error?:string}[];snapshotKind?:string;source?:string;revision:number;key:string;pages:{width:number;height:number;imageUrl:string;regions:Region[]}[]};
-type Props={stateKey:string;diff:boolean;projectId:string;revision:number;original:boolean;language:"en"|"zh";active:string;editing:string;highlighted:string|null;onSelect:(id:string,pageIndex?:number)=>void;onHover:(id:string|null,unit?:string)=>void;unitStyle:(pid:string,uid:string)=>{color?:number;focused:boolean};renderEditor:(pid:string)=>React.ReactNode;onClose:()=>void};
+type Props={navigation?:{id:string;serial:number};onUnmapped?:(id:string)=>void;stateKey:string;diff:boolean;projectId:string;revision:number;original:boolean;language:"en"|"zh";active:string;editing:string;highlighted:string|null;onSelect:(id:string,pageIndex?:number)=>void;onHover:(id:string|null,unit?:string)=>void;unitStyle:(pid:string,uid:string)=>{color?:number;focused:boolean};renderEditor:(pid:string)=>React.ReactNode;onClose:()=>void};
 const layouts=new Map<string,Layout>();
 const requests=new Map<string,Promise<Layout>>();
 function fetchLayout(key:string,url:string,revision:number,source:string){
@@ -12,7 +12,7 @@ function fetchLayout(key:string,url:string,revision:number,source:string){
  pending=fetch(url).then(async r=>{if(!r.ok){const e=await r.json().catch(()=>({detail:'页面生成失败'}));throw Error(e.detail||'页面生成失败');}const data:Layout=await r.json();if(data.revision!==revision)throw Error('文档版本已变化，请重新加载页面。');const value={...data,source};layouts.set(key,value);while(layouts.size>12)layouts.delete(layouts.keys().next().value!);return value;}).finally(()=>requests.delete(key));
  requests.set(key,pending);return pending;
 }
-export function NativePages({stateKey,diff,projectId,revision,original,language,active,editing,highlighted,onSelect,onHover,unitStyle,renderEditor,onClose}:Props){
+export function NativePages({navigation,onUnmapped,stateKey,diff,projectId,revision,original,language,active,editing,highlighted,onSelect,onHover,unitStyle,renderEditor,onClose}:Props){
  const editingRef=useRef(editing);editingRef.current=editing;
  const rootRef=useRef<HTMLDivElement>(null);
  const [anchor,setAnchor]=useState<{id:string;page:number}|null>(null);
@@ -43,6 +43,13 @@ export function NativePages({stateKey,diff,projectId,revision,original,language,
   const el=rootRef.current?.querySelector<HTMLElement>(`[data-native-page="${selected}"] [data-block="${editing}"]`);
   if(el&&pane&&bounds){const rect=el.getBoundingClientRect();if(rect.top<bounds.top||rect.top>bounds.bottom-80)pane.scrollTop+=rect.top-bounds.top-24;}
  },[editing,language,layout,source,anchor]);
+ useEffect(()=>{
+  if(!navigation || !layout || layout.source!==source || loading)return;
+  const target=rootRef.current?.querySelector<HTMLElement>(`[data-block="${navigation.id}"]`);
+  const pane=rootRef.current?.closest<HTMLElement>('.pane');
+  if(target&&pane){pane.scrollTo({top:pane.scrollTop+target.getBoundingClientRect().top-pane.getBoundingClientRect().top-12,behavior:'auto'});}
+  else onUnmapped?.(navigation.id);
+ },[navigation,layout,loading,source]);
  if(error && !layout)return <div className="native-message" role="alert"><strong>Word 页面暂不可用</strong><p>{error}</p><button onClick={()=>(layouts.delete(cacheKey),setRetry(x=>x+1))}>重新生成</button><p>可以切换“结构编辑”继续处理未同步内容。</p></div>;
  if(!layout || layout.source!==source)return <div className="native-message" role="status">正在准备 Word 页面…<p>已缓存的页面会直接复用。</p></div>;
  const stale=loading || !!error || layout.revision!==revision;

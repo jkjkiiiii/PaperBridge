@@ -286,6 +286,11 @@ def native_pages(pid: str, original: bool = False, language: str = "en", diff: b
     p = store.get(pid)
     if language not in ('en', 'zh'): raise HTTPException(status_code=422, detail='Unsupported language')
     if language == 'zh' and original: raise HTTPException(status_code=422, detail='Original document is English')
+    from . import layout_cache
+    source = store.source(p)
+    response_key = layout_cache.key(source, p, language, original, diff)
+    cached = layout_cache.get(response_key)
+    if cached is not None: return cached
     snapshot, pending = committed_preview(p)
     if any(x.get('protected') for x in snapshot['paragraphs']):
         from .documents import zero_width_bookmark_tokens
@@ -305,6 +310,8 @@ def native_pages(pid: str, original: bool = False, language: str = "en", diff: b
         result = native_layout(pdf, geometry_paragraphs, DATA/'native-pages', p['revision'], original, language)
         result.update(diff=diff, diffParagraphs=changed, diffMapping='paragraph-only-for-changed' if diff else None)
         result.update(pendingParagraphs=pending, disabledUnitParagraphs=[x['id'] for x in pending], snapshotKind='last-synced' if pending else 'current')
+        result['responseCacheHit'] = False
+        layout_cache.put(response_key, result)
         return result
     except PreviewError as exc:
         raise HTTPException(status_code=503, detail=str(exc)) from exc

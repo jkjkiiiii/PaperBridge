@@ -34,10 +34,16 @@ def render_preview(data: bytes, cache: Path) -> Path:
     key = preview_key(data)
     folder = cache / key
     pdf = folder / 'preview.pdf'
+    # Completed files are published atomically, so warm readers need not queue
+    # behind an unrelated cold Word session.
+    if pdf.exists() and pdf.stat().st_size > 0:
+        return pdf
     with _LOCK:
         if pdf.exists() and pdf.stat().st_size > 0:
             return pdf
         folder.mkdir(parents=True, exist_ok=True)
+        temporary = folder / 'preview.pending.pdf'
+        temporary.unlink(missing_ok=True)
         (folder / 'word-pid.json').unlink(missing_ok=True)
         (folder / 'input.docx').write_bytes(data)
         try:
@@ -58,11 +64,12 @@ def render_preview(data: bytes, cache: Path) -> Path:
                             win32api.TerminateProcess(handle, 1)
                     finally: handle.Close()
                 except Exception: pass
-            pdf.unlink(missing_ok=True)
+            temporary.unlink(missing_ok=True)
             raise PreviewError('Word 页面生成超时，请稍后重试。') from exc
-        if result.returncode or not pdf.exists():
-            pdf.unlink(missing_ok=True)
+        if result.returncode or not temporary.exists() or not temporary.stat().st_size:
+            temporary.unlink(missing_ok=True)
             raise PreviewError('Word 页面预览失败，请确认本机已安装并可启动 Microsoft Word，以及 pywin32 依赖可用。')
+        temporary.replace(pdf)
         return pdf
 
 
@@ -91,7 +98,7 @@ def worker(folder: Path):
         document = None
         document = app.Documents.Open(str(folder / 'input.docx'), ReadOnly=True,
             AddToRecentFiles=False, ConfirmConversions=False, OpenAndRepair=False)
-        document.ExportAsFixedFormat(str(folder / 'preview.pdf'), 17, OpenAfterExport=False,
+        document.ExportAsFixedFormat(str(folder / 'preview.pending.pdf'), 17, OpenAfterExport=False,
             IncludeDocProps=False, DocStructureTags=True)
     finally:
         try:
