@@ -1,0 +1,11 @@
+PaperBridge
+Copyright 2026 PaperBridge contributors
+
+Original project source is licensed under MIT License.
+The Attention Is All You Need demonstration includes a short attributed
+quotation from Vaswani et al. (2017), arXiv:1706.03762, and original adapted
+summaries and editing material. No license to the full paper is granted here.
+
+Provider architecture was independently implemented after studying publicly
+available documentation and OneClaw design. No OneClaw source is bundled.
+Third-party packages retain their own license terms; see THIRD_PARTY_NOTICES.md.

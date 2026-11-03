@@ -1,0 +1,18 @@
+[
+  {
+    "paragraphId": "p00006",
+    "beforeEn": "The paper introduces the Transformer, a sequence model that relies entirely on attention instead of recurrent or convolutional layers.",
+    "afterEn": "The paper introduces the Transformer, a sequence model that relies solely on attention instead of recurrent or convolutional layers. ",
+    "beforeZh": "本文介绍了Transformer，这是一种完全依赖注意力机制而非循环层或卷积层的序列模型。",
+    "afterZh": "本文介绍了Transformer，这是一种仅依赖注意力机制而非循环层或卷积层的序列模型。",
+    "status": "ready"
+  },
+  {
+    "paragraphId": "p00009",
+    "beforeEn": "This document demonstrates bilingual editing. The original document remains unchanged. The exported copy contains the approved text edits.",
+    "afterEn": "This document demonstrates bilingual editing. The exported copy contains the approved text edits. These modifications are for software demonstration purposes only.",
+    "beforeZh": "本文档演示了双语编辑功能。原始文档保持不变。导出的副本包含已批准的文本编辑内容。",
+    "afterZh": "本文档演示了双语编辑功能。导出的副本包含已批准的文本编辑内容。这些修改仅用于软件演示。",
+    "status": "ready"
+  }
+]

@@ -1,0 +1,29 @@
+name: Bug report
+description: Report a reproducible problem
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: Please use a synthetic or public document. Do not upload API keys or confidential manuscripts.
+  - type: textarea
+    id: behavior
+    attributes:
+      label: Expected and actual behavior
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to reproduce
+      description: Include the view, action and a minimal safe document if useful.
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Windows/Word/Python/Node version, model provider and model ID. Omit credentials.
+  - type: textarea
+    id: logs
+    attributes:
+      label: Sanitized error or screenshot

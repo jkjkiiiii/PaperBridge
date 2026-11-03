@@ -1,0 +1,19 @@
+.data/
+.venv/
+__pycache__/
+.pytest_cache/
+node_modules/
+dist/
+*.log
+.env
+*.tsbuildinfo
+artifacts/
+# Session planning and verification reports contain local/private project details.
+/方案.md
+/验证报告.md
+.coverage
+htmlcov/
+coverage.xml
+*.local
+.DS_Store
+Thumbs.db

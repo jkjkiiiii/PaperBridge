@@ -1,0 +1,3603 @@
+{
+  "schemaVersion": "1.0",
+  "sourceSha256": "4d02459191c397f0cb7f3a80241a7a47ad4b80f378c34ce835b5d2ae8a208175",
+  "revision": 22,
+  "operations": [
+    {
+      "id": "ff8eeb0756d8e5577dfc",
+      "type": "replace_text",
+      "paragraphId": "p00006",
+      "paragraphIndex": 5,
+      "beforeEn": "The paper introduces the Transformer, a sequence model that relies entirely on attention instead of recurrent or convolutional layers.",
+      "afterEn": "The paper introduces the Transformer, a sequence model that relies solely on attention instead of recurrent or convolutional layers. ",
+      "beforeZh": "本文介绍了Transformer，这是一种完全依赖注意力机制而非循环层或卷积层的序列模型。",
+      "afterZh": "本文介绍了Transformer，这是一种仅依赖注意力机制而非循环层或卷积层的序列模型。",
+      "sentenceIds": [
+        "p00006_s1"
+      ],
+      "inheritFrom": null,
+      "stylePolicy": null,
+      "status": "ready"
+    },
+    {
+      "id": "63d0ffe4f78a31fb0832",
+      "type": "replace_text",
+      "paragraphId": "p00009",
+      "paragraphIndex": 8,
+      "beforeEn": "This document demonstrates bilingual editing. The original document remains unchanged. The exported copy contains the approved text edits.",
+      "afterEn": "This document demonstrates bilingual editing. The exported copy contains the approved text edits. These modifications are for software demonstration purposes only.",
+      "beforeZh": "本文档演示了双语编辑功能。原始文档保持不变。导出的副本包含已批准的文本编辑内容。",
+      "afterZh": "本文档演示了双语编辑功能。导出的副本包含已批准的文本编辑内容。这些修改仅用于软件演示。",
+      "sentenceIds": [
+        "p00009_s1",
+        "p00009_s3",
+        "p00009_r2_new1"
+      ],
+      "inheritFrom": null,
+      "stylePolicy": null,
+      "status": "ready"
+    }
+  ],
+  "paragraphStates": [
+    {
+      "id": "p00001",
+      "index": 0,
+      "originalEn": "Attention Is All You Need",
+      "en": "Attention Is All You Need",
+      "zh": "注意力就是你所需要的一切",
+      "initialZh": "注意力就是你所需要的一切",
+      "draftZh": "注意力就是你所需要的一切",
+      "units": [
+        {
+          "id": "p00001_s1",
+          "text": "Attention Is All You Need",
+          "start": 0,
+          "end": 25
+        }
+      ],
+      "groups": [
+        {
+          "id": "gd49f01561b",
+          "source_ids": [
+            "p00001_s1"
+          ],
+          "target_ids": [
+            "z1"
+          ],
+          "color": 0,
+          "kind": "1:1",
+          "edges": [
+            {
+              "source_ids": [
+                "p00001_s1"
+              ],
+              "target_ids": [
+                "z1"
+              ]
+            }
+          ]
+        }
+      ],
+      "status": "ready",
+      "revision": 1,
+      "deleted": false,
+      "inserted": false,
+      "inheritFrom": null,
+      "container": "body",
+      "paragraphStyle": "Title",
+      "runs": [
+        {
+          "text": "Attention Is All You Need",
+          "start": 0,
+          "end": 25,
+          "protected": false,
+          "style": {}
+        }
+      ],
+      "protected": [],
+      "hasSection": false,
+      "targetUnits": [
+        {
+          "id": "z1",
+          "text": "注意力就是你所需要的一切",
+          "start": 0,
+          "end": 12
+        }
+      ],
+      "history": [
+        {
+          "id": "p00001",
+          "index": 0,
+          "originalEn": "Attention Is All You Need",
+          "en": "Attention Is All You Need",
+          "zh": "",
+          "initialZh": "",
+          "draftZh": "",
+          "units": [
+            {
+              "id": "p00001_s1",
+              "text": "Attention Is All You Need",
+              "start": 0,
+              "end": 25
+            }
+          ],
+          "groups": [],
+          "status": "untranslated",
+          "revision": 0,
+          "deleted": false,
+          "inserted": false,
+          "inheritFrom": null,
+          "container": "body",
+          "paragraphStyle": "Title",
+          "runs": [
+            {
+              "text": "Attention Is All You Need",
+              "start": 0,
+              "end": 25,
+              "protected": false,
+              "style": {}
+            }
+          ],
+          "protected": [],
+          "hasSection": false,
+          "targetUnits": [],
+          "error": "",
+          "originalUnits": [
+            {
+              "id": "p00001_s1",
+              "text": "Attention Is All You Need",
+              "start": 0,
+              "end": 25
+            }
+          ]
+        }
+      ],
+      "redo": [],
+      "error": "",
+      "originalUnits": [
+        {
+          "id": "p00001_s1",
+          "text": "Attention Is All You Need",
+          "start": 0,
+          "end": 25
+        }
+      ],
+      "modelMeta": {
+        "task": "translate_align",
+        "profileId": "qwen-local",
+        "model": "qwen/qwen3.8-27b",
+        "templateVersion": "1.1",
+        "templateHash": "80fd04780c747b040f528ee31d161d096386b95ee97828a9ea3cf8fc73695b02",
+        "inputHash": "69788780ae3d0a4e1c9fa20c50cb6488f2b1586f1eabd9b625de7e16aed77f9d",
+        "usage": {
+          "prompt_tokens": 342,
+          "completion_tokens": 70,
+          "total_tokens": 412,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "seconds": 1.35,
+        "cached": false
+      }
+    },
+    {
+      "id": "p00002",
+      "index": 1,
+      "originalEn": "PAPERBRIDGE  /  BILINGUAL EDITING DEMO",
+      "en": "PAPERBRIDGE  /  BILINGUAL EDITING DEMO",
+      "zh": "PAPERBRIDGE / 双语编辑演示",
+      "initialZh": "PAPERBRIDGE / 双语编辑演示",
+      "draftZh": "PAPERBRIDGE / 双语编辑演示",
+      "units": [
+        {
+          "id": "p00002_s1",
+          "text": "PAPERBRIDGE  /  BILINGUAL EDITING DEMO",
+          "start": 0,
+          "end": 38
+        }
+      ],
+      "groups": [
+        {
+          "id": "ge769c51e7b",
+          "source_ids": [
+            "p00002_s1"
+          ],
+          "target_ids": [
+            "z1"
+          ],
+          "color": 0,
+          "kind": "1:1",
+          "edges": [
+            {
+              "source_ids": [
+                "p00002_s1"
+              ],
+              "target_ids": [
+                "z1"
+              ]
+            }
+          ]
+        }
+      ],
+      "status": "ready",
+      "revision": 1,
+      "deleted": false,
+      "inserted": false,
+      "inheritFrom": null,
+      "container": "body",
+      "paragraphStyle": "Normal",
+      "runs": [
+        {
+          "text": "PAPERBRIDGE  /  BILINGUAL EDITING DEMO",
+          "start": 0,
+          "end": 38,
+          "protected": false,
+          "style": {
+            "color": "#718078",
+            "fontSize": "9.0pt"
+          }
+        }
+      ],
+      "protected": [],
+      "hasSection": false,
+      "targetUnits": [
+        {
+          "id": "z1",
+          "text": "PAPERBRIDGE / 双语编辑演示",
+          "start": 0,
+          "end": 20
+        }
+      ],
+      "history": [
+        {
+          "id": "p00002",
+          "index": 1,
+          "originalEn": "PAPERBRIDGE  /  BILINGUAL EDITING DEMO",
+          "en": "PAPERBRIDGE  /  BILINGUAL EDITING DEMO",
+          "zh": "",
+          "initialZh": "",
+          "draftZh": "",
+          "units": [
+            {
+              "id": "p00002_s1",
+              "text": "PAPERBRIDGE  /  BILINGUAL EDITING DEMO",
+              "start": 0,
+              "end": 38
+            }
+          ],
+          "groups": [],
+          "status": "untranslated",
+          "revision": 0,
+          "deleted": false,
+          "inserted": false,
+          "inheritFrom": null,
+          "container": "body",
+          "paragraphStyle": "Normal",
+          "runs": [
+            {
+              "text": "PAPERBRIDGE  /  BILINGUAL EDITING DEMO",
+              "start": 0,
+              "end": 38,
+              "protected": false,
+              "style": {
+                "color": "#718078",
+                "fontSize": "9.0pt"
+              }
+            }
+          ],
+          "protected": [],
+          "hasSection": false,
+          "targetUnits": [],
+          "error": "",
+          "originalUnits": [
+            {
+              "id": "p00002_s1",
+              "text": "PAPERBRIDGE  /  BILINGUAL EDITING DEMO",
+              "start": 0,
+              "end": 38
+            }
+          ]
+        }
+      ],
+      "redo": [],
+      "error": "",
+      "originalUnits": [
+        {
+          "id": "p00002_s1",
+          "text": "PAPERBRIDGE  /  BILINGUAL EDITING DEMO",
+          "start": 0,
+          "end": 38
+        }
+      ],
+      "modelMeta": {
+        "task": "translate_align",
+        "profileId": "qwen-local",
+        "model": "qwen/qwen3.8-27b",
+        "templateVersion": "1.1",
+        "templateHash": "80fd04780c747b040f528ee31d161d096386b95ee97828a9ea3cf8fc73695b02",
+        "inputHash": "9390d2d412b3540f0a97b206b4887a98f9871fca99b4368d61e4e1f000057d70",
+        "usage": {
+          "prompt_tokens": 371,
+          "completion_tokens": 74,
+          "total_tokens": 445,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "seconds": 0.89,
+        "cached": false
+      }
+    },
+    {
+      "id": "p00003",
+      "index": 2,
+      "originalEn": "Vaswani et al. · 2017 · arXiv:1706.03762",
+      "en": "Vaswani et al. · 2017 · arXiv:1706.03762",
+      "zh": "Vaswani 等人 · 2017 · arXiv:1706.03762",
+      "initialZh": "Vaswani 等人 · 2017 · arXiv:1706.03762",
+      "draftZh": "Vaswani 等人 · 2017 · arXiv:1706.03762",
+      "units": [
+        {
+          "id": "p00003_s1",
+          "text": "Vaswani et al. · 2017 · arXiv:1706.03762",
+          "start": 0,
+          "end": 40
+        }
+      ],
+      "groups": [
+        {
+          "id": "gbcf0d8b925",
+          "source_ids": [
+            "p00003_s1"
+          ],
+          "target_ids": [
+            "z1"
+          ],
+          "color": 0,
+          "kind": "1:1",
+          "edges": [
+            {
+              "source_ids": [
+                "p00003_s1"
+              ],
+              "target_ids": [
+                "z1"
+              ]
+            }
+          ]
+        }
+      ],
+      "status": "ready",
+      "revision": 1,
+      "deleted": false,
+      "inserted": false,
+      "inheritFrom": null,
+      "container": "body",
+      "paragraphStyle": "Normal",
+      "runs": [
+        {
+          "text": "Vaswani et al. · 2017 · arXiv:1706.03762",
+          "start": 0,
+          "end": 40,
+          "protected": false,
+          "style": {}
+        }
+      ],
+      "protected": [],
+      "hasSection": false,
+      "targetUnits": [
+        {
+          "id": "z1",
+          "text": "Vaswani 等人 · 2017 · arXiv:1706.03762",
+          "start": 0,
+          "end": 36
+        }
+      ],
+      "history": [
+        {
+          "id": "p00003",
+          "index": 2,
+          "originalEn": "Vaswani et al. · 2017 · arXiv:1706.03762",
+          "en": "Vaswani et al. · 2017 · arXiv:1706.03762",
+          "zh": "",
+          "initialZh": "",
+          "draftZh": "",
+          "units": [
+            {
+              "id": "p00003_s1",
+              "text": "Vaswani et al. · 2017 · arXiv:1706.03762",
+              "start": 0,
+              "end": 40
+            }
+          ],
+          "groups": [],
+          "status": "untranslated",
+          "revision": 0,
+          "deleted": false,
+          "inserted": false,
+          "inheritFrom": null,
+          "container": "body",
+          "paragraphStyle": "Normal",
+          "runs": [
+            {
+              "text": "Vaswani et al. · 2017 · arXiv:1706.03762",
+              "start": 0,
+              "end": 40,
+              "protected": false,
+              "style": {}
+            }
+          ],
+          "protected": [],
+          "hasSection": false,
+          "targetUnits": [],
+          "error": "",
+          "originalUnits": [
+            {
+              "id": "p00003_s1",
+              "text": "Vaswani et al. · 2017 · arXiv:1706.03762",
+              "start": 0,
+              "end": 40
+            }
+          ]
+        }
+      ],
+      "redo": [],
+      "error": "",
+      "originalUnits": [
+        {
+          "id": "p00003_s1",
+          "text": "Vaswani et al. · 2017 · arXiv:1706.03762",
+          "start": 0,
+          "end": 40
+        }
+      ],
+      "modelMeta": {
+        "task": "translate_align",
+        "profileId": "qwen-local",
+        "model": "qwen/qwen3.8-27b",
+        "templateVersion": "1.1",
+        "templateHash": "80fd04780c747b040f528ee31d161d096386b95ee97828a9ea3cf8fc73695b02",
+        "inputHash": "fc4f495f7a3e8dbe18cd2d8dcace09d84f375a75f0548dc6ff71605d3ff496bd",
+        "usage": {
+          "prompt_tokens": 372,
+          "completion_tokens": 92,
+          "total_tokens": 464,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "seconds": 1.01,
+        "cached": false
+      }
+    },
+    {
+      "id": "p00004",
+      "index": 3,
+      "originalEn": "Abstract · quotation and adapted summary",
+      "en": "Abstract · quotation and adapted summary",
+      "zh": "摘要 · 引文及改编摘要",
+      "initialZh": "摘要 · 引文及改编摘要",
+      "draftZh": "摘要 · 引文及改编摘要",
+      "units": [
+        {
+          "id": "p00004_s1",
+          "text": "Abstract · quotation and adapted summary",
+          "start": 0,
+          "end": 40
+        }
+      ],
+      "groups": [
+        {
+          "id": "gaa2a961a4b",
+          "source_ids": [
+            "p00004_s1"
+          ],
+          "target_ids": [
+            "z1"
+          ],
+          "color": 0,
+          "kind": "1:1",
+          "edges": [
+            {
+              "source_ids": [
+                "p00004_s1"
+              ],
+              "target_ids": [
+                "z1"
+              ]
+            }
+          ]
+        }
+      ],
+      "status": "ready",
+      "revision": 1,
+      "deleted": false,
+      "inserted": false,
+      "inheritFrom": null,
+      "container": "body",
+      "paragraphStyle": "Heading1",
+      "runs": [
+        {
+          "text": "Abstract · quotation and adapted summary",
+          "start": 0,
+          "end": 40,
+          "protected": false,
+          "style": {}
+        }
+      ],
+      "protected": [],
+      "hasSection": false,
+      "targetUnits": [
+        {
+          "id": "z1",
+          "text": "摘要 · 引文及改编摘要",
+          "start": 0,
+          "end": 12
+        }
+      ],
+      "history": [
+        {
+          "id": "p00004",
+          "index": 3,
+          "originalEn": "Abstract · quotation and adapted summary",
+          "en": "Abstract · quotation and adapted summary",
+          "zh": "",
+          "initialZh": "",
+          "draftZh": "",
+          "units": [
+            {
+              "id": "p00004_s1",
+              "text": "Abstract · quotation and adapted summary",
+              "start": 0,
+              "end": 40
+            }
+          ],
+          "groups": [],
+          "status": "untranslated",
+          "revision": 0,
+          "deleted": false,
+          "inserted": false,
+          "inheritFrom": null,
+          "container": "body",
+          "paragraphStyle": "Heading1",
+          "runs": [
+            {
+              "text": "Abstract · quotation and adapted summary",
+              "start": 0,
+              "end": 40,
+              "protected": false,
+              "style": {}
+            }
+          ],
+          "protected": [],
+          "hasSection": false,
+          "targetUnits": [],
+          "error": "",
+          "originalUnits": [
+            {
+              "id": "p00004_s1",
+              "text": "Abstract · quotation and adapted summary",
+              "start": 0,
+              "end": 40
+            }
+          ]
+        }
+      ],
+      "redo": [],
+      "error": "",
+      "originalUnits": [
+        {
+          "id": "p00004_s1",
+          "text": "Abstract · quotation and adapted summary",
+          "start": 0,
+          "end": 40
+        }
+      ],
+      "modelMeta": {
+        "task": "translate_align",
+        "profileId": "qwen-local",
+        "model": "qwen/qwen3.8-27b",
+        "templateVersion": "1.1",
+        "templateHash": "80fd04780c747b040f528ee31d161d096386b95ee97828a9ea3cf8fc73695b02",
+        "inputHash": "e90b806b6d0ca68b729fb270fa6a30ee639c39068fcf61b388b11ec1c646a097",
+        "usage": {
+          "prompt_tokens": 381,
+          "completion_tokens": 73,
+          "total_tokens": 454,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "seconds": 0.9,
+        "cached": false
+      }
+    },
+    {
+      "id": "p00005",
+      "index": 4,
+      "originalEn": "The dominant sequence transduction models are based on complex recurrent or convolutional neural networks in an encoder-decoder configuration.",
+      "en": "The dominant sequence transduction models are based on complex recurrent or convolutional neural networks in an encoder-decoder configuration.",
+      "zh": "主流的序列转换模型基于编码器-解码器架构，采用复杂的循环或卷积神经网络。",
+      "initialZh": "主流的序列转换模型基于编码器-解码器架构，采用复杂的循环或卷积神经网络。",
+      "draftZh": "主流的序列转换模型基于编码器-解码器架构，采用复杂的循环或卷积神经网络。",
+      "units": [
+        {
+          "id": "p00005_s1",
+          "text": "The dominant sequence transduction models are based on complex recurrent or convolutional neural networks in an encoder-decoder configuration.",
+          "start": 0,
+          "end": 142
+        }
+      ],
+      "groups": [
+        {
+          "id": "ge3e145c7f5",
+          "source_ids": [
+            "p00005_s1"
+          ],
+          "target_ids": [
+            "z1"
+          ],
+          "color": 0,
+          "kind": "1:1",
+          "edges": [
+            {
+              "source_ids": [
+                "p00005_s1"
+              ],
+              "target_ids": [
+                "z1"
+              ]
+            }
+          ]
+        }
+      ],
+      "status": "ready",
+      "revision": 1,
+      "deleted": false,
+      "inserted": false,
+      "inheritFrom": null,
+      "container": "body",
+      "paragraphStyle": "Normal",
+      "runs": [
+        {
+          "text": "The dominant sequence transduction models are based on complex recurrent or convolutional neural networks in an encoder-decoder configuration.",
+          "start": 0,
+          "end": 142,
+          "protected": false,
+          "style": {}
+        }
+      ],
+      "protected": [],
+      "hasSection": false,
+      "targetUnits": [
+        {
+          "id": "z1",
+          "text": "主流的序列转换模型基于编码器-解码器架构，采用复杂的循环或卷积神经网络。",
+          "start": 0,
+          "end": 36
+        }
+      ],
+      "history": [
+        {
+          "id": "p00005",
+          "index": 4,
+          "originalEn": "The dominant sequence transduction models are based on complex recurrent or convolutional neural networks in an encoder-decoder configuration.",
+          "en": "The dominant sequence transduction models are based on complex recurrent or convolutional neural networks in an encoder-decoder configuration.",
+          "zh": "",
+          "initialZh": "",
+          "draftZh": "",
+          "units": [
+            {
+              "id": "p00005_s1",
+              "text": "The dominant sequence transduction models are based on complex recurrent or convolutional neural networks in an encoder-decoder configuration.",
+              "start": 0,
+              "end": 142
+            }
+          ],
+          "groups": [],
+          "status": "untranslated",
+          "revision": 0,
+          "deleted": false,
+          "inserted": false,
+          "inheritFrom": null,
+          "container": "body",
+          "paragraphStyle": "Normal",
+          "runs": [
+            {
+              "text": "The dominant sequence transduction models are based on complex recurrent or convolutional neural networks in an encoder-decoder configuration.",
+              "start": 0,
+              "end": 142,
+              "protected": false,
+              "style": {}
+            }
+          ],
+          "protected": [],
+          "hasSection": false,
+          "targetUnits": [],
+          "error": "",
+          "originalUnits": [
+            {
+              "id": "p00005_s1",
+              "text": "The dominant sequence transduction models are based on complex recurrent or convolutional neural networks in an encoder-decoder configuration.",
+              "start": 0,
+              "end": 142
+            }
+          ]
+        }
+      ],
+      "redo": [],
+      "error": "",
+      "originalUnits": [
+        {
+          "id": "p00005_s1",
+          "text": "The dominant sequence transduction models are based on complex recurrent or convolutional neural networks in an encoder-decoder configuration.",
+          "start": 0,
+          "end": 142
+        }
+      ],
+      "modelMeta": {
+        "task": "translate_align",
+        "profileId": "qwen-local",
+        "model": "qwen/qwen3.8-27b",
+        "templateVersion": "1.1",
+        "templateHash": "80fd04780c747b040f528ee31d161d096386b95ee97828a9ea3cf8fc73695b02",
+        "inputHash": "9a07fb0febcebe98548d0ddb69e40494333733a1b1ec4018f1f62f9fdefc5653",
+        "usage": {
+          "prompt_tokens": 375,
+          "completion_tokens": 83,
+          "total_tokens": 458,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "seconds": 0.99,
+        "cached": false
+      }
+    },
+    {
+      "id": "p00006",
+      "index": 5,
+      "originalEn": "The paper introduces the Transformer, a sequence model that relies entirely on attention instead of recurrent or convolutional layers.",
+      "en": "The paper introduces the Transformer, a sequence model that relies solely on attention instead of recurrent or convolutional layers. ",
+      "zh": "本文介绍了Transformer，这是一种仅依赖注意力机制而非循环层或卷积层的序列模型。",
+      "initialZh": "本文介绍了Transformer，这是一种完全依赖注意力机制而非循环层或卷积层的序列模型。",
+      "draftZh": "本文介绍了Transformer，这是一种仅依赖注意力机制而非循环层或卷积层的序列模型。",
+      "units": [
+        {
+          "id": "p00006_s1",
+          "text": "The paper introduces the Transformer, a sequence model that relies solely on attention instead of recurrent or convolutional layers. ",
+          "start": 0,
+          "end": 133
+        }
+      ],
+      "groups": [
+        {
+          "id": "g4fb0e72ccb",
+          "source_ids": [
+            "p00006_s1"
+          ],
+          "target_ids": [
+            "p00006_z2_s1"
+          ],
+          "color": 0,
+          "kind": "1:1",
+          "edges": [
+            {
+              "source_ids": [
+                "p00006_s1"
+              ],
+              "target_ids": [
+                "p00006_z2_s1"
+              ]
+            }
+          ]
+        }
+      ],
+      "status": "ready",
+      "revision": 3,
+      "deleted": false,
+      "inserted": false,
+      "inheritFrom": null,
+      "container": "body",
+      "paragraphStyle": "Normal",
+      "runs": [
+        {
+          "text": "The paper introduces the Transformer, a sequence model that relies entirely on attention instead of recurrent or convolutional layers.",
+          "start": 0,
+          "end": 134,
+          "protected": false,
+          "style": {}
+        }
+      ],
+      "protected": [],
+      "hasSection": false,
+      "targetUnits": [
+        {
+          "id": "p00006_z2_s1",
+          "text": "本文介绍了Transformer，这是一种仅依赖注意力机制而非循环层或卷积层的序列模型。",
+          "start": 0,
+          "end": 44
+        }
+      ],
+      "history": [
+        {
+          "id": "p00006",
+          "index": 5,
+          "originalEn": "The paper introduces the Transformer, a sequence model that relies entirely on attention instead of recurrent or convolutional layers.",
+          "en": "The paper introduces the Transformer, a sequence model that relies entirely on attention instead of recurrent or convolutional layers.",
+          "zh": "",
+          "initialZh": "",
+          "draftZh": "",
+          "units": [
+            {
+              "id": "p00006_s1",
+              "text": "The paper introduces the Transformer, a sequence model that relies entirely on attention instead of recurrent or convolutional layers.",
+              "start": 0,
+              "end": 134
+            }
+          ],
+          "groups": [],
+          "status": "untranslated",
+          "revision": 0,
+          "deleted": false,
+          "inserted": false,
+          "inheritFrom": null,
+          "container": "body",
+          "paragraphStyle": "Normal",
+          "runs": [
+            {
+              "text": "The paper introduces the Transformer, a sequence model that relies entirely on attention instead of recurrent or convolutional layers.",
+              "start": 0,
+              "end": 134,
+              "protected": false,
+              "style": {}
+            }
+          ],
+          "protected": [],
+          "hasSection": false,
+          "targetUnits": [],
+          "error": "",
+          "originalUnits": [
+            {
+              "id": "p00006_s1",
+              "text": "The paper introduces the Transformer, a sequence model that relies entirely on attention instead of recurrent or convolutional layers.",
+              "start": 0,
+              "end": 134
+            }
+          ]
+        },
+        {
+          "id": "p00006",
+          "index": 5,
+          "originalEn": "The paper introduces the Transformer, a sequence model that relies entirely on attention instead of recurrent or convolutional layers.",
+          "en": "The paper introduces the Transformer, a sequence model that relies entirely on attention instead of recurrent or convolutional layers.",
+          "zh": "本文介绍了Transformer，这是一种完全依赖注意力机制而非循环层或卷积层的序列模型。",
+          "initialZh": "本文介绍了Transformer，这是一种完全依赖注意力机制而非循环层或卷积层的序列模型。",
+          "draftZh": "本文介绍了Transformer，这是一种完全依赖注意力机制而非循环层或卷积层的序列模型。",
+          "units": [
+            {
+              "id": "p00006_s1",
+              "text": "The paper introduces the Transformer, a sequence model that relies entirely on attention instead of recurrent or convolutional layers.",
+              "start": 0,
+              "end": 134
+            }
+          ],
+          "groups": [
+            {
+              "id": "g4fb0e72ccb",
+              "source_ids": [
+                "p00006_s1"
+              ],
+              "target_ids": [
+                "z1"
+              ],
+              "color": 0,
+              "kind": "1:1",
+              "edges": [
+                {
+                  "source_ids": [
+                    "p00006_s1"
+                  ],
+                  "target_ids": [
+                    "z1"
+                  ]
+                }
+              ]
+            }
+          ],
+          "status": "ready",
+          "revision": 1,
+          "deleted": false,
+          "inserted": false,
+          "inheritFrom": null,
+          "container": "body",
+          "paragraphStyle": "Normal",
+          "runs": [
+            {
+              "text": "The paper introduces the Transformer, a sequence model that relies entirely on attention instead of recurrent or convolutional layers.",
+              "start": 0,
+              "end": 134,
+              "protected": false,
+              "style": {}
+            }
+          ],
+          "protected": [],
+          "hasSection": false,
+          "targetUnits": [
+            {
+              "id": "z1",
+              "text": "本文介绍了Transformer，这是一种完全依赖注意力机制而非循环层或卷积层的序列模型。",
+              "start": 0,
+              "end": 45
+            }
+          ],
+          "error": "",
+          "originalUnits": [
+            {
+              "id": "p00006_s1",
+              "text": "The paper introduces the Transformer, a sequence model that relies entirely on attention instead of recurrent or convolutional layers.",
+              "start": 0,
+              "end": 134
+            }
+          ],
+          "modelMeta": {
+            "task": "translate_align",
+            "profileId": "qwen-local",
+            "model": "qwen/qwen3.8-27b",
+            "templateVersion": "1.1",
+            "templateHash": "80fd04780c747b040f528ee31d161d096386b95ee97828a9ea3cf8fc73695b02",
+            "inputHash": "da8f77dc37cd4c64a854fd953b25232fd78a960325dc5d173007530a616776c3",
+            "usage": {
+              "prompt_tokens": 391,
+              "completion_tokens": 83,
+              "total_tokens": 474,
+              "completion_tokens_details": {
+                "reasoning_tokens": 0
+              }
+            },
+            "seconds": 1.04,
+            "cached": false
+          }
+        }
+      ],
+      "redo": [],
+      "error": "",
+      "originalUnits": [
+        {
+          "id": "p00006_s1",
+          "text": "The paper introduces the Transformer, a sequence model that relies entirely on attention instead of recurrent or convolutional layers.",
+          "start": 0,
+          "end": 134
+        }
+      ],
+      "modelMeta": {
+        "task": "rewrite_en",
+        "profileId": "qwen-local",
+        "model": "qwen/qwen3.8-27b",
+        "templateVersion": "1.1",
+        "templateHash": "b2a0e86be92401b09ba1f8c681f31f0132593329b06fe3a52898978875043741",
+        "inputHash": "654147e924e66e7c42f37e85f357f62b66f559e11a00020d5790d98c0e02ac93",
+        "usage": {
+          "prompt_tokens": 672,
+          "completion_tokens": 132,
+          "total_tokens": 804,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "seconds": 1.78,
+        "cached": false
+      }
+    },
+    {
+      "id": "p00007",
+      "index": 6,
+      "originalEn": "The authors evaluate two translation tasks and report favorable quality, greater parallelism, and shorter training than the comparison systems.",
+      "en": "The authors evaluate two translation tasks and report favorable quality, greater parallelism, and shorter training than the comparison systems.",
+      "zh": "作者评估了两项翻译任务，并报告其质量优于对比系统，具有更高的并行性且训练时间更短。",
+      "initialZh": "作者评估了两项翻译任务，并报告其质量优于对比系统，具有更高的并行性且训练时间更短。",
+      "draftZh": "作者评估了两项翻译任务，并报告其质量优于对比系统，具有更高的并行性且训练时间更短。",
+      "units": [
+        {
+          "id": "p00007_s1",
+          "text": "The authors evaluate two translation tasks and report favorable quality, greater parallelism, and shorter training than the comparison systems.",
+          "start": 0,
+          "end": 143
+        }
+      ],
+      "groups": [
+        {
+          "id": "gb9c4422c05",
+          "source_ids": [
+            "p00007_s1"
+          ],
+          "target_ids": [
+            "z1"
+          ],
+          "color": 0,
+          "kind": "1:1",
+          "edges": [
+            {
+              "source_ids": [
+                "p00007_s1"
+              ],
+              "target_ids": [
+                "z1"
+              ]
+            }
+          ]
+        }
+      ],
+      "status": "ready",
+      "revision": 1,
+      "deleted": false,
+      "inserted": false,
+      "inheritFrom": null,
+      "container": "body",
+      "paragraphStyle": "Normal",
+      "runs": [
+        {
+          "text": "The authors evaluate two translation tasks and report favorable quality, greater parallelism, and shorter training than the comparison systems.",
+          "start": 0,
+          "end": 143,
+          "protected": false,
+          "style": {}
+        }
+      ],
+      "protected": [],
+      "hasSection": false,
+      "targetUnits": [
+        {
+          "id": "z1",
+          "text": "作者评估了两项翻译任务，并报告其质量优于对比系统，具有更高的并行性且训练时间更短。",
+          "start": 0,
+          "end": 41
+        }
+      ],
+      "history": [
+        {
+          "id": "p00007",
+          "index": 6,
+          "originalEn": "The authors evaluate two translation tasks and report favorable quality, greater parallelism, and shorter training than the comparison systems.",
+          "en": "The authors evaluate two translation tasks and report favorable quality, greater parallelism, and shorter training than the comparison systems.",
+          "zh": "",
+          "initialZh": "",
+          "draftZh": "",
+          "units": [
+            {
+              "id": "p00007_s1",
+              "text": "The authors evaluate two translation tasks and report favorable quality, greater parallelism, and shorter training than the comparison systems.",
+              "start": 0,
+              "end": 143
+            }
+          ],
+          "groups": [],
+          "status": "untranslated",
+          "revision": 0,
+          "deleted": false,
+          "inserted": false,
+          "inheritFrom": null,
+          "container": "body",
+          "paragraphStyle": "Normal",
+          "runs": [
+            {
+              "text": "The authors evaluate two translation tasks and report favorable quality, greater parallelism, and shorter training than the comparison systems.",
+              "start": 0,
+              "end": 143,
+              "protected": false,
+              "style": {}
+            }
+          ],
+          "protected": [],
+          "hasSection": false,
+          "targetUnits": [],
+          "error": "",
+          "originalUnits": [
+            {
+              "id": "p00007_s1",
+              "text": "The authors evaluate two translation tasks and report favorable quality, greater parallelism, and shorter training than the comparison systems.",
+              "start": 0,
+              "end": 143
+            }
+          ]
+        }
+      ],
+      "redo": [],
+      "error": "",
+      "originalUnits": [
+        {
+          "id": "p00007_s1",
+          "text": "The authors evaluate two translation tasks and report favorable quality, greater parallelism, and shorter training than the comparison systems.",
+          "start": 0,
+          "end": 143
+        }
+      ],
+      "modelMeta": {
+        "task": "translate_align",
+        "profileId": "qwen-local",
+        "model": "qwen/qwen3.8-27b",
+        "templateVersion": "1.1",
+        "templateHash": "80fd04780c747b040f528ee31d161d096386b95ee97828a9ea3cf8fc73695b02",
+        "inputHash": "94f3c9de85aee85701894981571598bc9c67b003817ed0a666e0098e3b6824be",
+        "usage": {
+          "prompt_tokens": 374,
+          "completion_tokens": 90,
+          "total_tokens": 464,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "seconds": 1.13,
+        "cached": false
+      }
+    },
+    {
+      "id": "p00008",
+      "index": 7,
+      "originalEn": "Editing sandbox · original demo text",
+      "en": "Editing sandbox · original demo text",
+      "zh": "编辑沙盒 · 原始演示文本",
+      "initialZh": "编辑沙盒 · 原始演示文本",
+      "draftZh": "编辑沙盒 · 原始演示文本",
+      "units": [
+        {
+          "id": "p00008_s1",
+          "text": "Editing sandbox · original demo text",
+          "start": 0,
+          "end": 36
+        }
+      ],
+      "groups": [
+        {
+          "id": "g92ac093094",
+          "source_ids": [
+            "p00008_s1"
+          ],
+          "target_ids": [
+            "z1"
+          ],
+          "color": 0,
+          "kind": "1:1",
+          "edges": [
+            {
+              "source_ids": [
+                "p00008_s1"
+              ],
+              "target_ids": [
+                "z1"
+              ]
+            }
+          ]
+        }
+      ],
+      "status": "ready",
+      "revision": 1,
+      "deleted": false,
+      "inserted": false,
+      "inheritFrom": null,
+      "container": "body",
+      "paragraphStyle": "Heading1",
+      "runs": [
+        {
+          "text": "Editing sandbox · original demo text",
+          "start": 0,
+          "end": 36,
+          "protected": false,
+          "style": {}
+        }
+      ],
+      "protected": [],
+      "hasSection": false,
+      "targetUnits": [
+        {
+          "id": "z1",
+          "text": "编辑沙盒 · 原始演示文本",
+          "start": 0,
+          "end": 13
+        }
+      ],
+      "history": [
+        {
+          "id": "p00008",
+          "index": 7,
+          "originalEn": "Editing sandbox · original demo text",
+          "en": "Editing sandbox · original demo text",
+          "zh": "",
+          "initialZh": "",
+          "draftZh": "",
+          "units": [
+            {
+              "id": "p00008_s1",
+              "text": "Editing sandbox · original demo text",
+              "start": 0,
+              "end": 36
+            }
+          ],
+          "groups": [],
+          "status": "untranslated",
+          "revision": 0,
+          "deleted": false,
+          "inserted": false,
+          "inheritFrom": null,
+          "container": "body",
+          "paragraphStyle": "Heading1",
+          "runs": [
+            {
+              "text": "Editing sandbox · original demo text",
+              "start": 0,
+              "end": 36,
+              "protected": false,
+              "style": {}
+            }
+          ],
+          "protected": [],
+          "hasSection": false,
+          "targetUnits": [],
+          "error": "",
+          "originalUnits": [
+            {
+              "id": "p00008_s1",
+              "text": "Editing sandbox · original demo text",
+              "start": 0,
+              "end": 36
+            }
+          ]
+        }
+      ],
+      "redo": [],
+      "error": "",
+      "originalUnits": [
+        {
+          "id": "p00008_s1",
+          "text": "Editing sandbox · original demo text",
+          "start": 0,
+          "end": 36
+        }
+      ],
+      "modelMeta": {
+        "task": "translate_align",
+        "profileId": "qwen-local",
+        "model": "qwen/qwen3.8-27b",
+        "templateVersion": "1.1",
+        "templateHash": "80fd04780c747b040f528ee31d161d096386b95ee97828a9ea3cf8fc73695b02",
+        "inputHash": "f0089d4ba65eba3da39c8497f9d300afc24320fb5ff26ab91c3faf8cb47a4dab",
+        "usage": {
+          "prompt_tokens": 373,
+          "completion_tokens": 73,
+          "total_tokens": 446,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "seconds": 0.86,
+        "cached": false
+      }
+    },
+    {
+      "id": "p00009",
+      "index": 8,
+      "originalEn": "This document demonstrates bilingual editing. The original document remains unchanged. The exported copy contains the approved text edits.",
+      "en": "This document demonstrates bilingual editing. The exported copy contains the approved text edits. These modifications are for software demonstration purposes only.",
+      "zh": "本文档演示了双语编辑功能。导出的副本包含已批准的文本编辑内容。这些修改仅用于软件演示。",
+      "initialZh": "本文档演示了双语编辑功能。原始文档保持不变。导出的副本包含已批准的文本编辑内容。",
+      "draftZh": "本文档演示了双语编辑功能。导出的副本包含已批准的文本编辑内容。这些修改仅用于软件演示。",
+      "units": [
+        {
+          "id": "p00009_s1",
+          "text": "This document demonstrates bilingual editing. ",
+          "start": 0,
+          "end": 46
+        },
+        {
+          "id": "p00009_s3",
+          "text": "The exported copy contains the approved text edits. ",
+          "start": 46,
+          "end": 98
+        },
+        {
+          "id": "p00009_r2_new1",
+          "text": "These modifications are for software demonstration purposes only.",
+          "start": 98,
+          "end": 163
+        }
+      ],
+      "groups": [
+        {
+          "id": "g8a0b8849cc",
+          "source_ids": [
+            "p00009_s1"
+          ],
+          "target_ids": [
+            "p00009_z2_s1"
+          ],
+          "color": 0,
+          "kind": "1:1",
+          "edges": [
+            {
+              "source_ids": [
+                "p00009_s1"
+              ],
+              "target_ids": [
+                "p00009_z2_s1"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "gffdbc0218b",
+          "source_ids": [
+            "p00009_s3"
+          ],
+          "target_ids": [
+            "p00009_z2_s2"
+          ],
+          "color": 2,
+          "kind": "1:1",
+          "edges": [
+            {
+              "source_ids": [
+                "p00009_s3"
+              ],
+              "target_ids": [
+                "p00009_z2_s2"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "gb2dd4aba2d",
+          "source_ids": [
+            "p00009_r2_new1"
+          ],
+          "target_ids": [
+            "p00009_z2_s3"
+          ],
+          "color": 3,
+          "kind": "1:1",
+          "edges": [
+            {
+              "source_ids": [
+                "p00009_r2_new1"
+              ],
+              "target_ids": [
+                "p00009_z2_s3"
+              ]
+            }
+          ]
+        }
+      ],
+      "status": "ready",
+      "revision": 3,
+      "deleted": false,
+      "inserted": false,
+      "inheritFrom": null,
+      "container": "body",
+      "paragraphStyle": "Normal",
+      "runs": [
+        {
+          "text": "This document demonstrates bilingual editing. The original document remains unchanged. The exported copy contains the approved text edits.",
+          "start": 0,
+          "end": 138,
+          "protected": false,
+          "style": {}
+        }
+      ],
+      "protected": [],
+      "hasSection": false,
+      "targetUnits": [
+        {
+          "id": "p00009_z2_s1",
+          "text": "本文档演示了双语编辑功能。",
+          "start": 0,
+          "end": 13
+        },
+        {
+          "id": "p00009_z2_s2",
+          "text": "导出的副本包含已批准的文本编辑内容。",
+          "start": 13,
+          "end": 31
+        },
+        {
+          "id": "p00009_z2_s3",
+          "text": "这些修改仅用于软件演示。",
+          "start": 31,
+          "end": 43
+        }
+      ],
+      "history": [
+        {
+          "id": "p00009",
+          "index": 8,
+          "originalEn": "This document demonstrates bilingual editing. The original document remains unchanged. The exported copy contains the approved text edits.",
+          "en": "This document demonstrates bilingual editing. The original document remains unchanged. The exported copy contains the approved text edits.",
+          "zh": "",
+          "initialZh": "",
+          "draftZh": "",
+          "units": [
+            {
+              "id": "p00009_s1",
+              "text": "This document demonstrates bilingual editing. ",
+              "start": 0,
+              "end": 46
+            },
+            {
+              "id": "p00009_s2",
+              "text": "The original document remains unchanged. ",
+              "start": 46,
+              "end": 87
+            },
+            {
+              "id": "p00009_s3",
+              "text": "The exported copy contains the approved text edits.",
+              "start": 87,
+              "end": 138
+            }
+          ],
+          "groups": [],
+          "status": "untranslated",
+          "revision": 0,
+          "deleted": false,
+          "inserted": false,
+          "inheritFrom": null,
+          "container": "body",
+          "paragraphStyle": "Normal",
+          "runs": [
+            {
+              "text": "This document demonstrates bilingual editing. The original document remains unchanged. The exported copy contains the approved text edits.",
+              "start": 0,
+              "end": 138,
+              "protected": false,
+              "style": {}
+            }
+          ],
+          "protected": [],
+          "hasSection": false,
+          "targetUnits": [],
+          "error": "",
+          "originalUnits": [
+            {
+              "id": "p00009_s1",
+              "text": "This document demonstrates bilingual editing. ",
+              "start": 0,
+              "end": 46
+            },
+            {
+              "id": "p00009_s2",
+              "text": "The original document remains unchanged. ",
+              "start": 46,
+              "end": 87
+            },
+            {
+              "id": "p00009_s3",
+              "text": "The exported copy contains the approved text edits.",
+              "start": 87,
+              "end": 138
+            }
+          ]
+        },
+        {
+          "id": "p00009",
+          "index": 8,
+          "originalEn": "This document demonstrates bilingual editing. The original document remains unchanged. The exported copy contains the approved text edits.",
+          "en": "This document demonstrates bilingual editing. The original document remains unchanged. The exported copy contains the approved text edits.",
+          "zh": "本文档演示了双语编辑功能。原始文档保持不变。导出的副本包含已批准的文本编辑内容。",
+          "initialZh": "本文档演示了双语编辑功能。原始文档保持不变。导出的副本包含已批准的文本编辑内容。",
+          "draftZh": "本文档演示了双语编辑功能。原始文档保持不变。导出的副本包含已批准的文本编辑内容。",
+          "units": [
+            {
+              "id": "p00009_s1",
+              "text": "This document demonstrates bilingual editing. ",
+              "start": 0,
+              "end": 46
+            },
+            {
+              "id": "p00009_s2",
+              "text": "The original document remains unchanged. ",
+              "start": 46,
+              "end": 87
+            },
+            {
+              "id": "p00009_s3",
+              "text": "The exported copy contains the approved text edits.",
+              "start": 87,
+              "end": 138
+            }
+          ],
+          "groups": [
+            {
+              "id": "g8a0b8849cc",
+              "source_ids": [
+                "p00009_s1"
+              ],
+              "target_ids": [
+                "z1"
+              ],
+              "color": 0,
+              "kind": "1:1",
+              "edges": [
+                {
+                  "source_ids": [
+                    "p00009_s1"
+                  ],
+                  "target_ids": [
+                    "z1"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "gce11b68c23",
+              "source_ids": [
+                "p00009_s2"
+              ],
+              "target_ids": [
+                "z2"
+              ],
+              "color": 1,
+              "kind": "1:1",
+              "edges": [
+                {
+                  "source_ids": [
+                    "p00009_s2"
+                  ],
+                  "target_ids": [
+                    "z2"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "gffdbc0218b",
+              "source_ids": [
+                "p00009_s3"
+              ],
+              "target_ids": [
+                "z3"
+              ],
+              "color": 2,
+              "kind": "1:1",
+              "edges": [
+                {
+                  "source_ids": [
+                    "p00009_s3"
+                  ],
+                  "target_ids": [
+                    "z3"
+                  ]
+                }
+              ]
+            }
+          ],
+          "status": "ready",
+          "revision": 1,
+          "deleted": false,
+          "inserted": false,
+          "inheritFrom": null,
+          "container": "body",
+          "paragraphStyle": "Normal",
+          "runs": [
+            {
+              "text": "This document demonstrates bilingual editing. The original document remains unchanged. The exported copy contains the approved text edits.",
+              "start": 0,
+              "end": 138,
+              "protected": false,
+              "style": {}
+            }
+          ],
+          "protected": [],
+          "hasSection": false,
+          "targetUnits": [
+            {
+              "id": "z1",
+              "text": "本文档演示了双语编辑功能。",
+              "start": 0,
+              "end": 13
+            },
+            {
+              "id": "z2",
+              "text": "原始文档保持不变。",
+              "start": 13,
+              "end": 22
+            },
+            {
+              "id": "z3",
+              "text": "导出的副本包含已批准的文本编辑内容。",
+              "start": 22,
+              "end": 40
+            }
+          ],
+          "error": "",
+          "originalUnits": [
+            {
+              "id": "p00009_s1",
+              "text": "This document demonstrates bilingual editing. ",
+              "start": 0,
+              "end": 46
+            },
+            {
+              "id": "p00009_s2",
+              "text": "The original document remains unchanged. ",
+              "start": 46,
+              "end": 87
+            },
+            {
+              "id": "p00009_s3",
+              "text": "The exported copy contains the approved text edits.",
+              "start": 87,
+              "end": 138
+            }
+          ],
+          "modelMeta": {
+            "task": "translate_align",
+            "profileId": "qwen-local",
+            "model": "qwen/qwen3.8-27b",
+            "templateVersion": "1.1",
+            "templateHash": "80fd04780c747b040f528ee31d161d096386b95ee97828a9ea3cf8fc73695b02",
+            "inputHash": "ee688f9e097cee1c59bba62dbf6183e3bd1cf8c059436cd80dd4d341896f1cf6",
+            "usage": {
+              "prompt_tokens": 416,
+              "completion_tokens": 175,
+              "total_tokens": 591,
+              "completion_tokens_details": {
+                "reasoning_tokens": 0
+              }
+            },
+            "seconds": 1.63,
+            "cached": false
+          }
+        }
+      ],
+      "redo": [],
+      "error": "",
+      "originalUnits": [
+        {
+          "id": "p00009_s1",
+          "text": "This document demonstrates bilingual editing. ",
+          "start": 0,
+          "end": 46
+        },
+        {
+          "id": "p00009_s2",
+          "text": "The original document remains unchanged. ",
+          "start": 46,
+          "end": 87
+        },
+        {
+          "id": "p00009_s3",
+          "text": "The exported copy contains the approved text edits.",
+          "start": 87,
+          "end": 138
+        }
+      ],
+      "modelMeta": {
+        "task": "rewrite_en",
+        "profileId": "qwen-local",
+        "model": "qwen/qwen3.8-27b",
+        "templateVersion": "1.1",
+        "templateHash": "b2a0e86be92401b09ba1f8c681f31f0132593329b06fe3a52898978875043741",
+        "inputHash": "78e217991ce7183a77aa62c2e79ef7545798fdab85c1a83434667f7ddf470a59",
+        "usage": {
+          "prompt_tokens": 815,
+          "completion_tokens": 281,
+          "total_tokens": 1096,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "seconds": 2.61,
+        "cached": false
+      }
+    },
+    {
+      "id": "p00010",
+      "index": 9,
+      "originalEn": "Step",
+      "en": "Step",
+      "zh": "步骤",
+      "initialZh": "步骤",
+      "draftZh": "步骤",
+      "units": [
+        {
+          "id": "p00010_s1",
+          "text": "Step",
+          "start": 0,
+          "end": 4
+        }
+      ],
+      "groups": [
+        {
+          "id": "g7c21975ffd",
+          "source_ids": [
+            "p00010_s1"
+          ],
+          "target_ids": [
+            "z1"
+          ],
+          "color": 0,
+          "kind": "1:1",
+          "edges": [
+            {
+              "source_ids": [
+                "p00010_s1"
+              ],
+              "target_ids": [
+                "z1"
+              ]
+            }
+          ]
+        }
+      ],
+      "status": "ready",
+      "revision": 1,
+      "deleted": false,
+      "inserted": false,
+      "inheritFrom": null,
+      "container": "table",
+      "paragraphStyle": "Normal",
+      "runs": [
+        {
+          "text": "Step",
+          "start": 0,
+          "end": 4,
+          "protected": false,
+          "style": {
+            "fontWeight": "bold"
+          }
+        }
+      ],
+      "protected": [],
+      "hasSection": false,
+      "targetUnits": [
+        {
+          "id": "z1",
+          "text": "步骤",
+          "start": 0,
+          "end": 2
+        }
+      ],
+      "history": [
+        {
+          "id": "p00010",
+          "index": 9,
+          "originalEn": "Step",
+          "en": "Step",
+          "zh": "",
+          "initialZh": "",
+          "draftZh": "",
+          "units": [
+            {
+              "id": "p00010_s1",
+              "text": "Step",
+              "start": 0,
+              "end": 4
+            }
+          ],
+          "groups": [],
+          "status": "untranslated",
+          "revision": 0,
+          "deleted": false,
+          "inserted": false,
+          "inheritFrom": null,
+          "container": "table",
+          "paragraphStyle": "Normal",
+          "runs": [
+            {
+              "text": "Step",
+              "start": 0,
+              "end": 4,
+              "protected": false,
+              "style": {
+                "fontWeight": "bold"
+              }
+            }
+          ],
+          "protected": [],
+          "hasSection": false,
+          "targetUnits": [],
+          "error": "",
+          "originalUnits": [
+            {
+              "id": "p00010_s1",
+              "text": "Step",
+              "start": 0,
+              "end": 4
+            }
+          ]
+        }
+      ],
+      "redo": [],
+      "error": "",
+      "originalUnits": [
+        {
+          "id": "p00010_s1",
+          "text": "Step",
+          "start": 0,
+          "end": 4
+        }
+      ],
+      "modelMeta": {
+        "task": "translate_align",
+        "profileId": "qwen-local",
+        "model": "qwen/qwen3.8-27b",
+        "templateVersion": "1.1",
+        "templateHash": "80fd04780c747b040f528ee31d161d096386b95ee97828a9ea3cf8fc73695b02",
+        "inputHash": "2e55d2f420e2109a794b885f5b1de763b0d06f1bd03490280dc4825ae8c4098f",
+        "usage": {
+          "prompt_tokens": 346,
+          "completion_tokens": 66,
+          "total_tokens": 412,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "seconds": 0.93,
+        "cached": false
+      }
+    },
+    {
+      "id": "p00011",
+      "index": 10,
+      "originalEn": "Demo action",
+      "en": "Demo action",
+      "zh": "演示操作",
+      "initialZh": "演示操作",
+      "draftZh": "演示操作",
+      "units": [
+        {
+          "id": "p00011_s1",
+          "text": "Demo action",
+          "start": 0,
+          "end": 11
+        }
+      ],
+      "groups": [
+        {
+          "id": "g01f8bc5bb2",
+          "source_ids": [
+            "p00011_s1"
+          ],
+          "target_ids": [
+            "z1"
+          ],
+          "color": 0,
+          "kind": "1:1",
+          "edges": [
+            {
+              "source_ids": [
+                "p00011_s1"
+              ],
+              "target_ids": [
+                "z1"
+              ]
+            }
+          ]
+        }
+      ],
+      "status": "ready",
+      "revision": 1,
+      "deleted": false,
+      "inserted": false,
+      "inheritFrom": null,
+      "container": "table",
+      "paragraphStyle": "Normal",
+      "runs": [
+        {
+          "text": "Demo action",
+          "start": 0,
+          "end": 11,
+          "protected": false,
+          "style": {
+            "fontWeight": "bold"
+          }
+        }
+      ],
+      "protected": [],
+      "hasSection": false,
+      "targetUnits": [
+        {
+          "id": "z1",
+          "text": "演示操作",
+          "start": 0,
+          "end": 4
+        }
+      ],
+      "history": [
+        {
+          "id": "p00011",
+          "index": 10,
+          "originalEn": "Demo action",
+          "en": "Demo action",
+          "zh": "",
+          "initialZh": "",
+          "draftZh": "",
+          "units": [
+            {
+              "id": "p00011_s1",
+              "text": "Demo action",
+              "start": 0,
+              "end": 11
+            }
+          ],
+          "groups": [],
+          "status": "untranslated",
+          "revision": 0,
+          "deleted": false,
+          "inserted": false,
+          "inheritFrom": null,
+          "container": "table",
+          "paragraphStyle": "Normal",
+          "runs": [
+            {
+              "text": "Demo action",
+              "start": 0,
+              "end": 11,
+              "protected": false,
+              "style": {
+                "fontWeight": "bold"
+              }
+            }
+          ],
+          "protected": [],
+          "hasSection": false,
+          "targetUnits": [],
+          "error": "",
+          "originalUnits": [
+            {
+              "id": "p00011_s1",
+              "text": "Demo action",
+              "start": 0,
+              "end": 11
+            }
+          ]
+        }
+      ],
+      "redo": [],
+      "error": "",
+      "originalUnits": [
+        {
+          "id": "p00011_s1",
+          "text": "Demo action",
+          "start": 0,
+          "end": 11
+        }
+      ],
+      "modelMeta": {
+        "task": "translate_align",
+        "profileId": "qwen-local",
+        "model": "qwen/qwen3.8-27b",
+        "templateVersion": "1.1",
+        "templateHash": "80fd04780c747b040f528ee31d161d096386b95ee97828a9ea3cf8fc73695b02",
+        "inputHash": "856d9aca5af56f41841220ff2f5356d82dea105167d98ceb34edfebbd04a5ef6",
+        "usage": {
+          "prompt_tokens": 331,
+          "completion_tokens": 67,
+          "total_tokens": 398,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "seconds": 0.85,
+        "cached": false
+      }
+    },
+    {
+      "id": "p00012",
+      "index": 11,
+      "originalEn": "01 · Translate",
+      "en": "01 · Translate",
+      "zh": "01 · 翻译",
+      "initialZh": "01 · 翻译",
+      "draftZh": "01 · 翻译",
+      "units": [
+        {
+          "id": "p00012_s1",
+          "text": "01 · Translate",
+          "start": 0,
+          "end": 14
+        }
+      ],
+      "groups": [
+        {
+          "id": "ga85efd0793",
+          "source_ids": [
+            "p00012_s1"
+          ],
+          "target_ids": [
+            "z1"
+          ],
+          "color": 0,
+          "kind": "1:1",
+          "edges": [
+            {
+              "source_ids": [
+                "p00012_s1"
+              ],
+              "target_ids": [
+                "z1"
+              ]
+            }
+          ]
+        }
+      ],
+      "status": "ready",
+      "revision": 1,
+      "deleted": false,
+      "inserted": false,
+      "inheritFrom": null,
+      "container": "table",
+      "paragraphStyle": "Normal",
+      "runs": [
+        {
+          "text": "01 · Translate",
+          "start": 0,
+          "end": 14,
+          "protected": false,
+          "style": {}
+        }
+      ],
+      "protected": [],
+      "hasSection": false,
+      "targetUnits": [
+        {
+          "id": "z1",
+          "text": "01 · 翻译",
+          "start": 0,
+          "end": 7
+        }
+      ],
+      "history": [
+        {
+          "id": "p00012",
+          "index": 11,
+          "originalEn": "01 · Translate",
+          "en": "01 · Translate",
+          "zh": "",
+          "initialZh": "",
+          "draftZh": "",
+          "units": [
+            {
+              "id": "p00012_s1",
+              "text": "01 · Translate",
+              "start": 0,
+              "end": 14
+            }
+          ],
+          "groups": [],
+          "status": "untranslated",
+          "revision": 0,
+          "deleted": false,
+          "inserted": false,
+          "inheritFrom": null,
+          "container": "table",
+          "paragraphStyle": "Normal",
+          "runs": [
+            {
+              "text": "01 · Translate",
+              "start": 0,
+              "end": 14,
+              "protected": false,
+              "style": {}
+            }
+          ],
+          "protected": [],
+          "hasSection": false,
+          "targetUnits": [],
+          "error": "",
+          "originalUnits": [
+            {
+              "id": "p00012_s1",
+              "text": "01 · Translate",
+              "start": 0,
+              "end": 14
+            }
+          ]
+        }
+      ],
+      "redo": [],
+      "error": "",
+      "originalUnits": [
+        {
+          "id": "p00012_s1",
+          "text": "01 · Translate",
+          "start": 0,
+          "end": 14
+        }
+      ],
+      "modelMeta": {
+        "task": "translate_align",
+        "profileId": "qwen-local",
+        "model": "qwen/qwen3.8-27b",
+        "templateVersion": "1.1",
+        "templateHash": "80fd04780c747b040f528ee31d161d096386b95ee97828a9ea3cf8fc73695b02",
+        "inputHash": "5cb4dc659dff07b454fc946a45f13099999a7afba6a61fc4f5f6a6d1eca2be94",
+        "usage": {
+          "prompt_tokens": 337,
+          "completion_tokens": 70,
+          "total_tokens": 407,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "seconds": 0.86,
+        "cached": false
+      }
+    },
+    {
+      "id": "p00013",
+      "index": 12,
+      "originalEn": "Generate Chinese text and sentence mappings.",
+      "en": "Generate Chinese text and sentence mappings.",
+      "zh": "生成中文文本及句子映射。",
+      "initialZh": "生成中文文本及句子映射。",
+      "draftZh": "生成中文文本及句子映射。",
+      "units": [
+        {
+          "id": "p00013_s1",
+          "text": "Generate Chinese text and sentence mappings.",
+          "start": 0,
+          "end": 44
+        }
+      ],
+      "groups": [
+        {
+          "id": "g25369d7f8e",
+          "source_ids": [
+            "p00013_s1"
+          ],
+          "target_ids": [
+            "z1"
+          ],
+          "color": 0,
+          "kind": "1:1",
+          "edges": [
+            {
+              "source_ids": [
+                "p00013_s1"
+              ],
+              "target_ids": [
+                "z1"
+              ]
+            }
+          ]
+        }
+      ],
+      "status": "ready",
+      "revision": 1,
+      "deleted": false,
+      "inserted": false,
+      "inheritFrom": null,
+      "container": "table",
+      "paragraphStyle": "Normal",
+      "runs": [
+        {
+          "text": "Generate Chinese text and sentence mappings.",
+          "start": 0,
+          "end": 44,
+          "protected": false,
+          "style": {}
+        }
+      ],
+      "protected": [],
+      "hasSection": false,
+      "targetUnits": [
+        {
+          "id": "z1",
+          "text": "生成中文文本及句子映射。",
+          "start": 0,
+          "end": 12
+        }
+      ],
+      "history": [
+        {
+          "id": "p00013",
+          "index": 12,
+          "originalEn": "Generate Chinese text and sentence mappings.",
+          "en": "Generate Chinese text and sentence mappings.",
+          "zh": "",
+          "initialZh": "",
+          "draftZh": "",
+          "units": [
+            {
+              "id": "p00013_s1",
+              "text": "Generate Chinese text and sentence mappings.",
+              "start": 0,
+              "end": 44
+            }
+          ],
+          "groups": [],
+          "status": "untranslated",
+          "revision": 0,
+          "deleted": false,
+          "inserted": false,
+          "inheritFrom": null,
+          "container": "table",
+          "paragraphStyle": "Normal",
+          "runs": [
+            {
+              "text": "Generate Chinese text and sentence mappings.",
+              "start": 0,
+              "end": 44,
+              "protected": false,
+              "style": {}
+            }
+          ],
+          "protected": [],
+          "hasSection": false,
+          "targetUnits": [],
+          "error": "",
+          "originalUnits": [
+            {
+              "id": "p00013_s1",
+              "text": "Generate Chinese text and sentence mappings.",
+              "start": 0,
+              "end": 44
+            }
+          ]
+        }
+      ],
+      "redo": [],
+      "error": "",
+      "originalUnits": [
+        {
+          "id": "p00013_s1",
+          "text": "Generate Chinese text and sentence mappings.",
+          "start": 0,
+          "end": 44
+        }
+      ],
+      "modelMeta": {
+        "task": "translate_align",
+        "profileId": "qwen-local",
+        "model": "qwen/qwen3.8-27b",
+        "templateVersion": "1.1",
+        "templateHash": "80fd04780c747b040f528ee31d161d096386b95ee97828a9ea3cf8fc73695b02",
+        "inputHash": "0f2af63d856a63c11973a29efd53e091a80e9240ddf17e1f158da1fe5af50191",
+        "usage": {
+          "prompt_tokens": 338,
+          "completion_tokens": 72,
+          "total_tokens": 410,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "seconds": 0.88,
+        "cached": false
+      }
+    },
+    {
+      "id": "p00014",
+      "index": 13,
+      "originalEn": "02 · Edit",
+      "en": "02 · Edit",
+      "zh": "02 · 编辑",
+      "initialZh": "02 · 编辑",
+      "draftZh": "02 · 编辑",
+      "units": [
+        {
+          "id": "p00014_s1",
+          "text": "02 · Edit",
+          "start": 0,
+          "end": 9
+        }
+      ],
+      "groups": [
+        {
+          "id": "g4545a9485e",
+          "source_ids": [
+            "p00014_s1"
+          ],
+          "target_ids": [
+            "z1"
+          ],
+          "color": 0,
+          "kind": "1:1",
+          "edges": [
+            {
+              "source_ids": [
+                "p00014_s1"
+              ],
+              "target_ids": [
+                "z1"
+              ]
+            }
+          ]
+        }
+      ],
+      "status": "ready",
+      "revision": 1,
+      "deleted": false,
+      "inserted": false,
+      "inheritFrom": null,
+      "container": "table",
+      "paragraphStyle": "Normal",
+      "runs": [
+        {
+          "text": "02 · Edit",
+          "start": 0,
+          "end": 9,
+          "protected": false,
+          "style": {}
+        }
+      ],
+      "protected": [],
+      "hasSection": false,
+      "targetUnits": [
+        {
+          "id": "z1",
+          "text": "02 · 编辑",
+          "start": 0,
+          "end": 7
+        }
+      ],
+      "history": [
+        {
+          "id": "p00014",
+          "index": 13,
+          "originalEn": "02 · Edit",
+          "en": "02 · Edit",
+          "zh": "",
+          "initialZh": "",
+          "draftZh": "",
+          "units": [
+            {
+              "id": "p00014_s1",
+              "text": "02 · Edit",
+              "start": 0,
+              "end": 9
+            }
+          ],
+          "groups": [],
+          "status": "untranslated",
+          "revision": 0,
+          "deleted": false,
+          "inserted": false,
+          "inheritFrom": null,
+          "container": "table",
+          "paragraphStyle": "Normal",
+          "runs": [
+            {
+              "text": "02 · Edit",
+              "start": 0,
+              "end": 9,
+              "protected": false,
+              "style": {}
+            }
+          ],
+          "protected": [],
+          "hasSection": false,
+          "targetUnits": [],
+          "error": "",
+          "originalUnits": [
+            {
+              "id": "p00014_s1",
+              "text": "02 · Edit",
+              "start": 0,
+              "end": 9
+            }
+          ]
+        }
+      ],
+      "redo": [],
+      "error": "",
+      "originalUnits": [
+        {
+          "id": "p00014_s1",
+          "text": "02 · Edit",
+          "start": 0,
+          "end": 9
+        }
+      ],
+      "modelMeta": {
+        "task": "translate_align",
+        "profileId": "qwen-local",
+        "model": "qwen/qwen3.8-27b",
+        "templateVersion": "1.1",
+        "templateHash": "80fd04780c747b040f528ee31d161d096386b95ee97828a9ea3cf8fc73695b02",
+        "inputHash": "0d06269410e75e376e040ee453ae1d30ef04ab2d928a12031c03e3df00836a21",
+        "usage": {
+          "prompt_tokens": 346,
+          "completion_tokens": 70,
+          "total_tokens": 416,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "seconds": 0.85,
+        "cached": false
+      }
+    },
+    {
+      "id": "p00015",
+      "index": 14,
+      "originalEn": "Revise wording, remove a sentence, and insert a sentence.",
+      "en": "Revise wording, remove a sentence, and insert a sentence.",
+      "zh": "修改措辞，删除一个句子，并插入一个句子。",
+      "initialZh": "修改措辞，删除一个句子，并插入一个句子。",
+      "draftZh": "修改措辞，删除一个句子，并插入一个句子。",
+      "units": [
+        {
+          "id": "p00015_s1",
+          "text": "Revise wording, remove a sentence, and insert a sentence.",
+          "start": 0,
+          "end": 57
+        }
+      ],
+      "groups": [
+        {
+          "id": "g537d381f51",
+          "source_ids": [
+            "p00015_s1"
+          ],
+          "target_ids": [
+            "z1"
+          ],
+          "color": 0,
+          "kind": "1:1",
+          "edges": [
+            {
+              "source_ids": [
+                "p00015_s1"
+              ],
+              "target_ids": [
+                "z1"
+              ]
+            }
+          ]
+        }
+      ],
+      "status": "ready",
+      "revision": 1,
+      "deleted": false,
+      "inserted": false,
+      "inheritFrom": null,
+      "container": "table",
+      "paragraphStyle": "Normal",
+      "runs": [
+        {
+          "text": "Revise wording, remove a sentence, and insert a sentence.",
+          "start": 0,
+          "end": 57,
+          "protected": false,
+          "style": {}
+        }
+      ],
+      "protected": [],
+      "hasSection": false,
+      "targetUnits": [
+        {
+          "id": "z1",
+          "text": "修改措辞，删除一个句子，并插入一个句子。",
+          "start": 0,
+          "end": 20
+        }
+      ],
+      "history": [
+        {
+          "id": "p00015",
+          "index": 14,
+          "originalEn": "Revise wording, remove a sentence, and insert a sentence.",
+          "en": "Revise wording, remove a sentence, and insert a sentence.",
+          "zh": "",
+          "initialZh": "",
+          "draftZh": "",
+          "units": [
+            {
+              "id": "p00015_s1",
+              "text": "Revise wording, remove a sentence, and insert a sentence.",
+              "start": 0,
+              "end": 57
+            }
+          ],
+          "groups": [],
+          "status": "untranslated",
+          "revision": 0,
+          "deleted": false,
+          "inserted": false,
+          "inheritFrom": null,
+          "container": "table",
+          "paragraphStyle": "Normal",
+          "runs": [
+            {
+              "text": "Revise wording, remove a sentence, and insert a sentence.",
+              "start": 0,
+              "end": 57,
+              "protected": false,
+              "style": {}
+            }
+          ],
+          "protected": [],
+          "hasSection": false,
+          "targetUnits": [],
+          "error": "",
+          "originalUnits": [
+            {
+              "id": "p00015_s1",
+              "text": "Revise wording, remove a sentence, and insert a sentence.",
+              "start": 0,
+              "end": 57
+            }
+          ]
+        }
+      ],
+      "redo": [],
+      "error": "",
+      "originalUnits": [
+        {
+          "id": "p00015_s1",
+          "text": "Revise wording, remove a sentence, and insert a sentence.",
+          "start": 0,
+          "end": 57
+        }
+      ],
+      "modelMeta": {
+        "task": "translate_align",
+        "profileId": "qwen-local",
+        "model": "qwen/qwen3.8-27b",
+        "templateVersion": "1.1",
+        "templateHash": "80fd04780c747b040f528ee31d161d096386b95ee97828a9ea3cf8fc73695b02",
+        "inputHash": "8a6b1145a478155f46e2bc6da686707256a608d36ef69a5a2a37d6c52ad00898",
+        "usage": {
+          "prompt_tokens": 344,
+          "completion_tokens": 78,
+          "total_tokens": 422,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "seconds": 0.96,
+        "cached": false
+      }
+    },
+    {
+      "id": "p00016",
+      "index": 15,
+      "originalEn": "03 · Export",
+      "en": "03 · Export",
+      "zh": "03 · 导出",
+      "initialZh": "03 · 导出",
+      "draftZh": "03 · 导出",
+      "units": [
+        {
+          "id": "p00016_s1",
+          "text": "03 · Export",
+          "start": 0,
+          "end": 11
+        }
+      ],
+      "groups": [
+        {
+          "id": "gd465c621b6",
+          "source_ids": [
+            "p00016_s1"
+          ],
+          "target_ids": [
+            "z1"
+          ],
+          "color": 0,
+          "kind": "1:1",
+          "edges": [
+            {
+              "source_ids": [
+                "p00016_s1"
+              ],
+              "target_ids": [
+                "z1"
+              ]
+            }
+          ]
+        }
+      ],
+      "status": "ready",
+      "revision": 1,
+      "deleted": false,
+      "inserted": false,
+      "inheritFrom": null,
+      "container": "table",
+      "paragraphStyle": "Normal",
+      "runs": [
+        {
+          "text": "03 · Export",
+          "start": 0,
+          "end": 11,
+          "protected": false,
+          "style": {}
+        }
+      ],
+      "protected": [],
+      "hasSection": false,
+      "targetUnits": [
+        {
+          "id": "z1",
+          "text": "03 · 导出",
+          "start": 0,
+          "end": 7
+        }
+      ],
+      "history": [
+        {
+          "id": "p00016",
+          "index": 15,
+          "originalEn": "03 · Export",
+          "en": "03 · Export",
+          "zh": "",
+          "initialZh": "",
+          "draftZh": "",
+          "units": [
+            {
+              "id": "p00016_s1",
+              "text": "03 · Export",
+              "start": 0,
+              "end": 11
+            }
+          ],
+          "groups": [],
+          "status": "untranslated",
+          "revision": 0,
+          "deleted": false,
+          "inserted": false,
+          "inheritFrom": null,
+          "container": "table",
+          "paragraphStyle": "Normal",
+          "runs": [
+            {
+              "text": "03 · Export",
+              "start": 0,
+              "end": 11,
+              "protected": false,
+              "style": {}
+            }
+          ],
+          "protected": [],
+          "hasSection": false,
+          "targetUnits": [],
+          "error": "",
+          "originalUnits": [
+            {
+              "id": "p00016_s1",
+              "text": "03 · Export",
+              "start": 0,
+              "end": 11
+            }
+          ]
+        }
+      ],
+      "redo": [],
+      "error": "",
+      "originalUnits": [
+        {
+          "id": "p00016_s1",
+          "text": "03 · Export",
+          "start": 0,
+          "end": 11
+        }
+      ],
+      "modelMeta": {
+        "task": "translate_align",
+        "profileId": "qwen-local",
+        "model": "qwen/qwen3.8-27b",
+        "templateVersion": "1.1",
+        "templateHash": "80fd04780c747b040f528ee31d161d096386b95ee97828a9ea3cf8fc73695b02",
+        "inputHash": "352dd320c912ea1b6dc602dc18b616b8653f1c7aa3d5272ebe66d33dc9706f1d",
+        "usage": {
+          "prompt_tokens": 353,
+          "completion_tokens": 70,
+          "total_tokens": 423,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "seconds": 0.86,
+        "cached": false
+      }
+    },
+    {
+      "id": "p00017",
+      "index": 16,
+      "originalEn": "Save an edited English DOCX copy and a JSON change log.",
+      "en": "Save an edited English DOCX copy and a JSON change log.",
+      "zh": "保存一份编辑后的英文 DOCX 副本以及一份 JSON 格式变更记录。",
+      "initialZh": "保存一份编辑后的英文 DOCX 副本以及一份 JSON 格式变更记录。",
+      "draftZh": "保存一份编辑后的英文 DOCX 副本以及一份 JSON 格式变更记录。",
+      "units": [
+        {
+          "id": "p00017_s1",
+          "text": "Save an edited English DOCX copy and a JSON change log.",
+          "start": 0,
+          "end": 55
+        }
+      ],
+      "groups": [
+        {
+          "id": "ge7085fadf1",
+          "source_ids": [
+            "p00017_s1"
+          ],
+          "target_ids": [
+            "z1"
+          ],
+          "color": 0,
+          "kind": "1:1",
+          "edges": [
+            {
+              "source_ids": [
+                "p00017_s1"
+              ],
+              "target_ids": [
+                "z1"
+              ]
+            }
+          ]
+        }
+      ],
+      "status": "ready",
+      "revision": 1,
+      "deleted": false,
+      "inserted": false,
+      "inheritFrom": null,
+      "container": "table",
+      "paragraphStyle": "Normal",
+      "runs": [
+        {
+          "text": "Save an edited English DOCX copy and a JSON change log.",
+          "start": 0,
+          "end": 55,
+          "protected": false,
+          "style": {}
+        }
+      ],
+      "protected": [],
+      "hasSection": false,
+      "targetUnits": [
+        {
+          "id": "z1",
+          "text": "保存一份编辑后的英文 DOCX 副本以及一份 JSON 格式变更记录。",
+          "start": 0,
+          "end": 35
+        }
+      ],
+      "history": [
+        {
+          "id": "p00017",
+          "index": 16,
+          "originalEn": "Save an edited English DOCX copy and a JSON change log.",
+          "en": "Save an edited English DOCX copy and a JSON change log.",
+          "zh": "",
+          "initialZh": "",
+          "draftZh": "",
+          "units": [
+            {
+              "id": "p00017_s1",
+              "text": "Save an edited English DOCX copy and a JSON change log.",
+              "start": 0,
+              "end": 55
+            }
+          ],
+          "groups": [],
+          "status": "untranslated",
+          "revision": 0,
+          "deleted": false,
+          "inserted": false,
+          "inheritFrom": null,
+          "container": "table",
+          "paragraphStyle": "Normal",
+          "runs": [
+            {
+              "text": "Save an edited English DOCX copy and a JSON change log.",
+              "start": 0,
+              "end": 55,
+              "protected": false,
+              "style": {}
+            }
+          ],
+          "protected": [],
+          "hasSection": false,
+          "targetUnits": [],
+          "error": "",
+          "originalUnits": [
+            {
+              "id": "p00017_s1",
+              "text": "Save an edited English DOCX copy and a JSON change log.",
+              "start": 0,
+              "end": 55
+            }
+          ]
+        }
+      ],
+      "redo": [],
+      "error": "",
+      "originalUnits": [
+        {
+          "id": "p00017_s1",
+          "text": "Save an edited English DOCX copy and a JSON change log.",
+          "start": 0,
+          "end": 55
+        }
+      ],
+      "modelMeta": {
+        "task": "translate_align",
+        "profileId": "qwen-local",
+        "model": "qwen/qwen3.8-27b",
+        "templateVersion": "1.1",
+        "templateHash": "80fd04780c747b040f528ee31d161d096386b95ee97828a9ea3cf8fc73695b02",
+        "inputHash": "ba2ec80aef8f6124bbe9d04f35e6b2b057a40a598a79e0171b97e3a31361fa70",
+        "usage": {
+          "prompt_tokens": 392,
+          "completion_tokens": 81,
+          "total_tokens": 473,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "seconds": 0.99,
+        "cached": false
+      }
+    },
+    {
+      "id": "p00018",
+      "index": 17,
+      "originalEn": "Source: https://arxiv.org/abs/1706.03762 · First abstract sentence quoted; the following two paragraphs are adapted summaries. Sandbox and table are original demo material. Edits are illustrative, not paper corrections.",
+      "en": "Source: https://arxiv.org/abs/1706.03762 · First abstract sentence quoted; the following two paragraphs are adapted summaries. Sandbox and table are original demo material. Edits are illustrative, not paper corrections.",
+      "zh": "来源：https://arxiv.org/abs/1706.03762 · 首句为摘要原文引用；以下两段为改编后的摘要。沙盒和表格为原创演示材料。编辑内容仅为示例，并非对论文的更正。",
+      "initialZh": "来源：https://arxiv.org/abs/1706.03762 · 首句为摘要原文引用；以下两段为改编后的摘要。沙盒和表格为原创演示材料。编辑内容仅为示例，并非对论文的更正。",
+      "draftZh": "来源：https://arxiv.org/abs/1706.03762 · 首句为摘要原文引用；以下两段为改编后的摘要。沙盒和表格为原创演示材料。编辑内容仅为示例，并非对论文的更正。",
+      "units": [
+        {
+          "id": "p00018_s1",
+          "text": "Source: https://arxiv.org/abs/1706.03762 · First abstract sentence quoted; the following two paragraphs are adapted summaries. ",
+          "start": 0,
+          "end": 127
+        },
+        {
+          "id": "p00018_s2",
+          "text": "Sandbox and table are original demo material. ",
+          "start": 127,
+          "end": 173
+        },
+        {
+          "id": "p00018_s3",
+          "text": "Edits are illustrative, not paper corrections.",
+          "start": 173,
+          "end": 219
+        }
+      ],
+      "groups": [
+        {
+          "id": "g0a3093d2f5",
+          "source_ids": [
+            "p00018_s1"
+          ],
+          "target_ids": [
+            "z1"
+          ],
+          "color": 0,
+          "kind": "1:1",
+          "edges": [
+            {
+              "source_ids": [
+                "p00018_s1"
+              ],
+              "target_ids": [
+                "z1"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "g0a7751e6a0",
+          "source_ids": [
+            "p00018_s2"
+          ],
+          "target_ids": [
+            "z2"
+          ],
+          "color": 1,
+          "kind": "1:1",
+          "edges": [
+            {
+              "source_ids": [
+                "p00018_s2"
+              ],
+              "target_ids": [
+                "z2"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "g625e7af62d",
+          "source_ids": [
+            "p00018_s3"
+          ],
+          "target_ids": [
+            "z3"
+          ],
+          "color": 2,
+          "kind": "1:1",
+          "edges": [
+            {
+              "source_ids": [
+                "p00018_s3"
+              ],
+              "target_ids": [
+                "z3"
+              ]
+            }
+          ]
+        }
+      ],
+      "status": "ready",
+      "revision": 1,
+      "deleted": false,
+      "inserted": false,
+      "inheritFrom": null,
+      "container": "body",
+      "paragraphStyle": "Normal",
+      "runs": [
+        {
+          "text": "Source: https://arxiv.org/abs/1706.03762 · First abstract sentence quoted; the following two paragraphs are adapted summaries. Sandbox and table are original demo material. Edits are illustrative, not paper corrections.",
+          "start": 0,
+          "end": 219,
+          "protected": false,
+          "style": {
+            "color": "#718078",
+            "fontSize": "8.0pt"
+          }
+        }
+      ],
+      "protected": [],
+      "hasSection": false,
+      "targetUnits": [
+        {
+          "id": "z1",
+          "text": "来源：https://arxiv.org/abs/1706.03762 · 首句为摘要原文引用；以下两段为改编后的摘要。",
+          "start": 0,
+          "end": 60
+        },
+        {
+          "id": "z2",
+          "text": "沙盒和表格为原创演示材料。",
+          "start": 60,
+          "end": 73
+        },
+        {
+          "id": "z3",
+          "text": "编辑内容仅为示例，并非对论文的更正。",
+          "start": 73,
+          "end": 91
+        }
+      ],
+      "history": [
+        {
+          "id": "p00018",
+          "index": 17,
+          "originalEn": "Source: https://arxiv.org/abs/1706.03762 · First abstract sentence quoted; the following two paragraphs are adapted summaries. Sandbox and table are original demo material. Edits are illustrative, not paper corrections.",
+          "en": "Source: https://arxiv.org/abs/1706.03762 · First abstract sentence quoted; the following two paragraphs are adapted summaries. Sandbox and table are original demo material. Edits are illustrative, not paper corrections.",
+          "zh": "",
+          "initialZh": "",
+          "draftZh": "",
+          "units": [
+            {
+              "id": "p00018_s1",
+              "text": "Source: https://arxiv.org/abs/1706.03762 · First abstract sentence quoted; the following two paragraphs are adapted summaries. ",
+              "start": 0,
+              "end": 127
+            },
+            {
+              "id": "p00018_s2",
+              "text": "Sandbox and table are original demo material. ",
+              "start": 127,
+              "end": 173
+            },
+            {
+              "id": "p00018_s3",
+              "text": "Edits are illustrative, not paper corrections.",
+              "start": 173,
+              "end": 219
+            }
+          ],
+          "groups": [],
+          "status": "untranslated",
+          "revision": 0,
+          "deleted": false,
+          "inserted": false,
+          "inheritFrom": null,
+          "container": "body",
+          "paragraphStyle": "Normal",
+          "runs": [
+            {
+              "text": "Source: https://arxiv.org/abs/1706.03762 · First abstract sentence quoted; the following two paragraphs are adapted summaries. Sandbox and table are original demo material. Edits are illustrative, not paper corrections.",
+              "start": 0,
+              "end": 219,
+              "protected": false,
+              "style": {
+                "color": "#718078",
+                "fontSize": "8.0pt"
+              }
+            }
+          ],
+          "protected": [],
+          "hasSection": false,
+          "targetUnits": [],
+          "error": "",
+          "originalUnits": [
+            {
+              "id": "p00018_s1",
+              "text": "Source: https://arxiv.org/abs/1706.03762 · First abstract sentence quoted; the following two paragraphs are adapted summaries. ",
+              "start": 0,
+              "end": 127
+            },
+            {
+              "id": "p00018_s2",
+              "text": "Sandbox and table are original demo material. ",
+              "start": 127,
+              "end": 173
+            },
+            {
+              "id": "p00018_s3",
+              "text": "Edits are illustrative, not paper corrections.",
+              "start": 173,
+              "end": 219
+            }
+          ]
+        }
+      ],
+      "redo": [],
+      "error": "",
+      "originalUnits": [
+        {
+          "id": "p00018_s1",
+          "text": "Source: https://arxiv.org/abs/1706.03762 · First abstract sentence quoted; the following two paragraphs are adapted summaries. ",
+          "start": 0,
+          "end": 127
+        },
+        {
+          "id": "p00018_s2",
+          "text": "Sandbox and table are original demo material. ",
+          "start": 127,
+          "end": 173
+        },
+        {
+          "id": "p00018_s3",
+          "text": "Edits are illustrative, not paper corrections.",
+          "start": 173,
+          "end": 219
+        }
+      ],
+      "modelMeta": {
+        "task": "translate_align",
+        "profileId": "qwen-local",
+        "model": "qwen/qwen3.8-27b",
+        "templateVersion": "1.1",
+        "templateHash": "80fd04780c747b040f528ee31d161d096386b95ee97828a9ea3cf8fc73695b02",
+        "inputHash": "81fe61828b4d54ec20466852fa0bb1f9138e4e79ab37daefa97827f76e66ffb3",
+        "usage": {
+          "prompt_tokens": 457,
+          "completion_tokens": 208,
+          "total_tokens": 665,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "seconds": 1.97,
+        "cached": false
+      }
+    }
+  ],
+  "events": [
+    {
+      "id": "d3e85f5113d44682a779e734d323f251",
+      "time": "2026-11-03T07:30:26.765200+00:00",
+      "paragraphId": "p00001",
+      "type": "translate_align",
+      "revision": 1,
+      "model": {
+        "task": "translate_align",
+        "profileId": "qwen-local",
+        "model": "qwen/qwen3.8-27b",
+        "templateVersion": "1.1",
+        "templateHash": "80fd04780c747b040f528ee31d161d096386b95ee97828a9ea3cf8fc73695b02",
+        "inputHash": "69788780ae3d0a4e1c9fa20c50cb6488f2b1586f1eabd9b625de7e16aed77f9d",
+        "usage": {
+          "prompt_tokens": 342,
+          "completion_tokens": 70,
+          "total_tokens": 412,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "seconds": 1.35,
+        "cached": false
+      }
+    },
+    {
+      "id": "79470612b92748d19f7dbdeb68e5d72e",
+      "time": "2026-11-03T07:30:27.948850+00:00",
+      "paragraphId": "p00002",
+      "type": "translate_align",
+      "revision": 2,
+      "model": {
+        "task": "translate_align",
+        "profileId": "qwen-local",
+        "model": "qwen/qwen3.8-27b",
+        "templateVersion": "1.1",
+        "templateHash": "80fd04780c747b040f528ee31d161d096386b95ee97828a9ea3cf8fc73695b02",
+        "inputHash": "9390d2d412b3540f0a97b206b4887a98f9871fca99b4368d61e4e1f000057d70",
+        "usage": {
+          "prompt_tokens": 371,
+          "completion_tokens": 74,
+          "total_tokens": 445,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "seconds": 0.89,
+        "cached": false
+      }
+    },
+    {
+      "id": "c1205b20195848b8965a8386c2b9004d",
+      "time": "2026-11-03T07:30:28.982339+00:00",
+      "paragraphId": "p00003",
+      "type": "translate_align",
+      "revision": 3,
+      "model": {
+        "task": "translate_align",
+        "profileId": "qwen-local",
+        "model": "qwen/qwen3.8-27b",
+        "templateVersion": "1.1",
+        "templateHash": "80fd04780c747b040f528ee31d161d096386b95ee97828a9ea3cf8fc73695b02",
+        "inputHash": "fc4f495f7a3e8dbe18cd2d8dcace09d84f375a75f0548dc6ff71605d3ff496bd",
+        "usage": {
+          "prompt_tokens": 372,
+          "completion_tokens": 92,
+          "total_tokens": 464,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "seconds": 1.01,
+        "cached": false
+      }
+    },
+    {
+      "id": "85e843a7b49c4d6d93c034bca296b51b",
+      "time": "2026-11-03T07:30:29.897576+00:00",
+      "paragraphId": "p00004",
+      "type": "translate_align",
+      "revision": 4,
+      "model": {
+        "task": "translate_align",
+        "profileId": "qwen-local",
+        "model": "qwen/qwen3.8-27b",
+        "templateVersion": "1.1",
+        "templateHash": "80fd04780c747b040f528ee31d161d096386b95ee97828a9ea3cf8fc73695b02",
+        "inputHash": "e90b806b6d0ca68b729fb270fa6a30ee639c39068fcf61b388b11ec1c646a097",
+        "usage": {
+          "prompt_tokens": 381,
+          "completion_tokens": 73,
+          "total_tokens": 454,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "seconds": 0.9,
+        "cached": false
+      }
+    },
+    {
+      "id": "ab748040c9d241d299f51ad2023ceffe",
+      "time": "2026-11-03T07:30:30.908343+00:00",
+      "paragraphId": "p00005",
+      "type": "translate_align",
+      "revision": 5,
+      "model": {
+        "task": "translate_align",
+        "profileId": "qwen-local",
+        "model": "qwen/qwen3.8-27b",
+        "templateVersion": "1.1",
+        "templateHash": "80fd04780c747b040f528ee31d161d096386b95ee97828a9ea3cf8fc73695b02",
+        "inputHash": "9a07fb0febcebe98548d0ddb69e40494333733a1b1ec4018f1f62f9fdefc5653",
+        "usage": {
+          "prompt_tokens": 375,
+          "completion_tokens": 83,
+          "total_tokens": 458,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "seconds": 0.99,
+        "cached": false
+      }
+    },
+    {
+      "id": "b3eb015cba564afda45291c320eda521",
+      "time": "2026-11-03T07:30:32.004876+00:00",
+      "paragraphId": "p00006",
+      "type": "translate_align",
+      "revision": 6,
+      "model": {
+        "task": "translate_align",
+        "profileId": "qwen-local",
+        "model": "qwen/qwen3.8-27b",
+        "templateVersion": "1.1",
+        "templateHash": "80fd04780c747b040f528ee31d161d096386b95ee97828a9ea3cf8fc73695b02",
+        "inputHash": "da8f77dc37cd4c64a854fd953b25232fd78a960325dc5d173007530a616776c3",
+        "usage": {
+          "prompt_tokens": 391,
+          "completion_tokens": 83,
+          "total_tokens": 474,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "seconds": 1.04,
+        "cached": false
+      }
+    },
+    {
+      "id": "27710b93ade74c82a41e31de5211f951",
+      "time": "2026-11-03T07:30:33.157351+00:00",
+      "paragraphId": "p00007",
+      "type": "translate_align",
+      "revision": 7,
+      "model": {
+        "task": "translate_align",
+        "profileId": "qwen-local",
+        "model": "qwen/qwen3.8-27b",
+        "templateVersion": "1.1",
+        "templateHash": "80fd04780c747b040f528ee31d161d096386b95ee97828a9ea3cf8fc73695b02",
+        "inputHash": "94f3c9de85aee85701894981571598bc9c67b003817ed0a666e0098e3b6824be",
+        "usage": {
+          "prompt_tokens": 374,
+          "completion_tokens": 90,
+          "total_tokens": 464,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "seconds": 1.13,
+        "cached": false
+      }
+    },
+    {
+      "id": "cd9eb4812be04f8e929b0776282bddc9",
+      "time": "2026-11-03T07:30:34.044248+00:00",
+      "paragraphId": "p00008",
+      "type": "translate_align",
+      "revision": 8,
+      "model": {
+        "task": "translate_align",
+        "profileId": "qwen-local",
+        "model": "qwen/qwen3.8-27b",
+        "templateVersion": "1.1",
+        "templateHash": "80fd04780c747b040f528ee31d161d096386b95ee97828a9ea3cf8fc73695b02",
+        "inputHash": "f0089d4ba65eba3da39c8497f9d300afc24320fb5ff26ab91c3faf8cb47a4dab",
+        "usage": {
+          "prompt_tokens": 373,
+          "completion_tokens": 73,
+          "total_tokens": 446,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "seconds": 0.86,
+        "cached": false
+      }
+    },
+    {
+      "id": "adc871982b81432a9e7139c493803f70",
+      "time": "2026-11-03T07:30:35.691413+00:00",
+      "paragraphId": "p00009",
+      "type": "translate_align",
+      "revision": 9,
+      "model": {
+        "task": "translate_align",
+        "profileId": "qwen-local",
+        "model": "qwen/qwen3.8-27b",
+        "templateVersion": "1.1",
+        "templateHash": "80fd04780c747b040f528ee31d161d096386b95ee97828a9ea3cf8fc73695b02",
+        "inputHash": "ee688f9e097cee1c59bba62dbf6183e3bd1cf8c059436cd80dd4d341896f1cf6",
+        "usage": {
+          "prompt_tokens": 416,
+          "completion_tokens": 175,
+          "total_tokens": 591,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "seconds": 1.63,
+        "cached": false
+      }
+    },
+    {
+      "id": "53231d776ad34ac79c8bb0638e539bb6",
+      "time": "2026-11-03T07:30:36.674470+00:00",
+      "paragraphId": "p00010",
+      "type": "translate_align",
+      "revision": 10,
+      "model": {
+        "task": "translate_align",
+        "profileId": "qwen-local",
+        "model": "qwen/qwen3.8-27b",
+        "templateVersion": "1.1",
+        "templateHash": "80fd04780c747b040f528ee31d161d096386b95ee97828a9ea3cf8fc73695b02",
+        "inputHash": "2e55d2f420e2109a794b885f5b1de763b0d06f1bd03490280dc4825ae8c4098f",
+        "usage": {
+          "prompt_tokens": 346,
+          "completion_tokens": 66,
+          "total_tokens": 412,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "seconds": 0.93,
+        "cached": false
+      }
+    },
+    {
+      "id": "3f5319f365c04496b4c4ba43a64a489c",
+      "time": "2026-11-03T07:30:37.571762+00:00",
+      "paragraphId": "p00011",
+      "type": "translate_align",
+      "revision": 11,
+      "model": {
+        "task": "translate_align",
+        "profileId": "qwen-local",
+        "model": "qwen/qwen3.8-27b",
+        "templateVersion": "1.1",
+        "templateHash": "80fd04780c747b040f528ee31d161d096386b95ee97828a9ea3cf8fc73695b02",
+        "inputHash": "856d9aca5af56f41841220ff2f5356d82dea105167d98ceb34edfebbd04a5ef6",
+        "usage": {
+          "prompt_tokens": 331,
+          "completion_tokens": 67,
+          "total_tokens": 398,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "seconds": 0.85,
+        "cached": false
+      }
+    },
+    {
+      "id": "c75ea18ea4f44bee8b175ce7801e8775",
+      "time": "2026-11-03T07:30:38.451350+00:00",
+      "paragraphId": "p00012",
+      "type": "translate_align",
+      "revision": 12,
+      "model": {
+        "task": "translate_align",
+        "profileId": "qwen-local",
+        "model": "qwen/qwen3.8-27b",
+        "templateVersion": "1.1",
+        "templateHash": "80fd04780c747b040f528ee31d161d096386b95ee97828a9ea3cf8fc73695b02",
+        "inputHash": "5cb4dc659dff07b454fc946a45f13099999a7afba6a61fc4f5f6a6d1eca2be94",
+        "usage": {
+          "prompt_tokens": 337,
+          "completion_tokens": 70,
+          "total_tokens": 407,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "seconds": 0.86,
+        "cached": false
+      }
+    },
+    {
+      "id": "568030844c66428e81b4fb0b59337198",
+      "time": "2026-11-03T07:30:39.370780+00:00",
+      "paragraphId": "p00013",
+      "type": "translate_align",
+      "revision": 13,
+      "model": {
+        "task": "translate_align",
+        "profileId": "qwen-local",
+        "model": "qwen/qwen3.8-27b",
+        "templateVersion": "1.1",
+        "templateHash": "80fd04780c747b040f528ee31d161d096386b95ee97828a9ea3cf8fc73695b02",
+        "inputHash": "0f2af63d856a63c11973a29efd53e091a80e9240ddf17e1f158da1fe5af50191",
+        "usage": {
+          "prompt_tokens": 338,
+          "completion_tokens": 72,
+          "total_tokens": 410,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "seconds": 0.88,
+        "cached": false
+      }
+    },
+    {
+      "id": "8d969f5907bf4e47a77b953a5b3b4277",
+      "time": "2026-11-03T07:30:40.248755+00:00",
+      "paragraphId": "p00014",
+      "type": "translate_align",
+      "revision": 14,
+      "model": {
+        "task": "translate_align",
+        "profileId": "qwen-local",
+        "model": "qwen/qwen3.8-27b",
+        "templateVersion": "1.1",
+        "templateHash": "80fd04780c747b040f528ee31d161d096386b95ee97828a9ea3cf8fc73695b02",
+        "inputHash": "0d06269410e75e376e040ee453ae1d30ef04ab2d928a12031c03e3df00836a21",
+        "usage": {
+          "prompt_tokens": 346,
+          "completion_tokens": 70,
+          "total_tokens": 416,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "seconds": 0.85,
+        "cached": false
+      }
+    },
+    {
+      "id": "ca669fffb66142adad7d256b0e33d959",
+      "time": "2026-11-03T07:30:41.235923+00:00",
+      "paragraphId": "p00015",
+      "type": "translate_align",
+      "revision": 15,
+      "model": {
+        "task": "translate_align",
+        "profileId": "qwen-local",
+        "model": "qwen/qwen3.8-27b",
+        "templateVersion": "1.1",
+        "templateHash": "80fd04780c747b040f528ee31d161d096386b95ee97828a9ea3cf8fc73695b02",
+        "inputHash": "8a6b1145a478155f46e2bc6da686707256a608d36ef69a5a2a37d6c52ad00898",
+        "usage": {
+          "prompt_tokens": 344,
+          "completion_tokens": 78,
+          "total_tokens": 422,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "seconds": 0.96,
+        "cached": false
+      }
+    },
+    {
+      "id": "67531ac2084a4655aefc7ef44b3379bd",
+      "time": "2026-11-03T07:30:42.122152+00:00",
+      "paragraphId": "p00016",
+      "type": "translate_align",
+      "revision": 16,
+      "model": {
+        "task": "translate_align",
+        "profileId": "qwen-local",
+        "model": "qwen/qwen3.8-27b",
+        "templateVersion": "1.1",
+        "templateHash": "80fd04780c747b040f528ee31d161d096386b95ee97828a9ea3cf8fc73695b02",
+        "inputHash": "352dd320c912ea1b6dc602dc18b616b8653f1c7aa3d5272ebe66d33dc9706f1d",
+        "usage": {
+          "prompt_tokens": 353,
+          "completion_tokens": 70,
+          "total_tokens": 423,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "seconds": 0.86,
+        "cached": false
+      }
+    },
+    {
+      "id": "e3e4e2501e0a4be98ae20951d99fd013",
+      "time": "2026-11-03T07:30:43.133741+00:00",
+      "paragraphId": "p00017",
+      "type": "translate_align",
+      "revision": 17,
+      "model": {
+        "task": "translate_align",
+        "profileId": "qwen-local",
+        "model": "qwen/qwen3.8-27b",
+        "templateVersion": "1.1",
+        "templateHash": "80fd04780c747b040f528ee31d161d096386b95ee97828a9ea3cf8fc73695b02",
+        "inputHash": "ba2ec80aef8f6124bbe9d04f35e6b2b057a40a598a79e0171b97e3a31361fa70",
+        "usage": {
+          "prompt_tokens": 392,
+          "completion_tokens": 81,
+          "total_tokens": 473,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "seconds": 0.99,
+        "cached": false
+      }
+    },
+    {
+      "id": "60064d76a2a5455aa15c3e81bef3a4d0",
+      "time": "2026-11-03T07:30:45.127639+00:00",
+      "paragraphId": "p00018",
+      "type": "translate_align",
+      "revision": 18,
+      "model": {
+        "task": "translate_align",
+        "profileId": "qwen-local",
+        "model": "qwen/qwen3.8-27b",
+        "templateVersion": "1.1",
+        "templateHash": "80fd04780c747b040f528ee31d161d096386b95ee97828a9ea3cf8fc73695b02",
+        "inputHash": "81fe61828b4d54ec20466852fa0bb1f9138e4e79ab37daefa97827f76e66ffb3",
+        "usage": {
+          "prompt_tokens": 457,
+          "completion_tokens": 208,
+          "total_tokens": 665,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "seconds": 1.97,
+        "cached": false
+      }
+    },
+    {
+      "id": "86a956cf82cf43a5a75e78391a829826",
+      "time": "2026-11-03T07:35:18.988427+00:00",
+      "paragraphId": "p00006",
+      "type": "edit_chinese",
+      "revision": 19
+    },
+    {
+      "id": "0da286a07c1f4c568a0aa60b10102dc6",
+      "time": "2026-11-03T07:35:20.796262+00:00",
+      "paragraphId": "p00006",
+      "type": "rewrite_en",
+      "revision": 20,
+      "model": {
+        "task": "rewrite_en",
+        "profileId": "qwen-local",
+        "model": "qwen/qwen3.8-27b",
+        "templateVersion": "1.1",
+        "templateHash": "b2a0e86be92401b09ba1f8c681f31f0132593329b06fe3a52898978875043741",
+        "inputHash": "654147e924e66e7c42f37e85f357f62b66f559e11a00020d5790d98c0e02ac93",
+        "usage": {
+          "prompt_tokens": 672,
+          "completion_tokens": 132,
+          "total_tokens": 804,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "seconds": 1.78,
+        "cached": false
+      }
+    },
+    {
+      "id": "a2f66d243f254e3a8af5bde0d3daac7d",
+      "time": "2026-11-03T07:35:20.816768+00:00",
+      "paragraphId": "p00009",
+      "type": "edit_chinese",
+      "revision": 21
+    },
+    {
+      "id": "ee2a8ebc4d9541b1acea806470c5d636",
+      "time": "2026-11-03T07:35:23.476467+00:00",
+      "paragraphId": "p00009",
+      "type": "rewrite_en",
+      "revision": 22,
+      "model": {
+        "task": "rewrite_en",
+        "profileId": "qwen-local",
+        "model": "qwen/qwen3.8-27b",
+        "templateVersion": "1.1",
+        "templateHash": "b2a0e86be92401b09ba1f8c681f31f0132593329b06fe3a52898978875043741",
+        "inputHash": "78e217991ce7183a77aa62c2e79ef7545798fdab85c1a83434667f7ddf470a59",
+        "usage": {
+          "prompt_tokens": 815,
+          "completion_tokens": 281,
+          "total_tokens": 1096,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          }
+        },
+        "seconds": 2.61,
+        "cached": false
+      }
+    }
+  ]
+}
