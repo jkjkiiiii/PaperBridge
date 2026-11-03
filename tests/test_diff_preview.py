@@ -1,5 +1,6 @@
 from copy import deepcopy
 from io import BytesIO
+from zipfile import ZipFile
 from docx import Document
 from server.documents import extract,load_package,NS,export_docx
 from server.diff_preview import build_diff_preview,display_diffs
@@ -18,7 +19,12 @@ def test_visual_diff_is_disposable_and_retains_deleted_paragraph():
     data,ps=fixture();ps[0]['en']='I love her. We live here.';ps[1]['deleted']=True
     saved=deepcopy(ps);normal=export_docx(data,ps)
     diff,geometry,changed=build_diff_preview(data,ps,'en')
-    assert ps==saved and export_docx(data,ps)==normal
+    assert ps==saved
+    # ZIP member timestamps can cross a clock tick while the Node diff runs.
+    # Compare every package part, including binary assets, not ZIP envelopes.
+    with ZipFile(BytesIO(normal)) as before, ZipFile(BytesIO(export_docx(data,ps))) as after:
+        assert before.namelist()==after.namelist()
+        assert {name:before.read(name) for name in before.namelist()} == {name:after.read(name) for name in after.namelist()}
     assert changed==['p00001','p00002']
     assert [p['en'] for p in extract(diff)]==['I love youher. We live here.','Deleted paragraph.']
     assert all(not p['deleted'] for p in geometry)
