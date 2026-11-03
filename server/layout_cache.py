@@ -11,7 +11,7 @@ LIMIT = 12
 
 
 def key(source, snapshot, language, original, diff):
-    digest=sha256(b'native-response-v1')
+    digest=sha256(b'native-response-v2')
     digest.update(sha256(source).digest())
     digest.update(json.dumps([snapshot,language,original,diff],ensure_ascii=False,sort_keys=True,separators=(',',':')).encode('utf-8'))
     return digest.hexdigest()

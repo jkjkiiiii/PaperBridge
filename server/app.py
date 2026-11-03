@@ -306,6 +306,9 @@ def native_pages(pid: str, original: bool = False, language: str = "en", diff: b
         data = build_chinese_preview(store.source(p), snapshot['paragraphs']) if language == 'zh' else (store.source(p) if original else export_docx(store.source(p), snapshot['paragraphs']))
         geometry_paragraphs = snapshot['paragraphs']
     try:
+        if source.startswith(b'PK'):
+            from .native_anchors import prepare_native_anchors
+            data, geometry_paragraphs = prepare_native_anchors(data, geometry_paragraphs, original)
         pdf = render_preview(data, DATA/'previews')
         result = native_layout(pdf, geometry_paragraphs, DATA/'native-pages', p['revision'], original, language)
         result.update(diff=diff, diffParagraphs=changed, diffMapping='paragraph-only-for-changed' if diff else None)

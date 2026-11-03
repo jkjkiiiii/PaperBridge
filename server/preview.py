@@ -17,7 +17,7 @@ class PreviewError(ValueError):
 def preview_key(data: bytes) -> str:
     # ZIP entry timestamps/compression change on export even when every Word
     # part is identical. Hash named uncompressed parts, not the ZIP envelope.
-    digest = sha256(b'word-pdf-parts-v2')
+    digest = sha256(b'word-pdf-parts-v3')
     try:
         with ZipFile(BytesIO(data)) as archive:
             for name in sorted(archive.namelist()):
@@ -98,8 +98,11 @@ def worker(folder: Path):
         document = None
         document = app.Documents.Open(str(folder / 'input.docx'), ReadOnly=True,
             AddToRecentFiles=False, ConfirmConversions=False, OpenAndRepair=False)
+        with ZipFile(folder / 'input.docx') as package:
+            import re
+            native = bool(re.search(rb'PB[0-9a-f]{8}X*P\d{5}', package.read('word/document.xml')))
         document.ExportAsFixedFormat(str(folder / 'preview.pending.pdf'), 17, OpenAfterExport=False,
-            IncludeDocProps=False, DocStructureTags=True)
+            IncludeDocProps=False, DocStructureTags=True, CreateBookmarks=2 if native else 0)
     finally:
         try:
             if document is not None: document.Close(SaveChanges=0)

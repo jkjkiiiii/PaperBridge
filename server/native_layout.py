@@ -8,7 +8,7 @@ from uuid import uuid4
 import unicodedata
 import pymupdf
 
-VERSION = b'native-layout-v4'
+VERSION = b'native-layout-v7'
 RASTER_VERSION = b'native-layout-v2'
 
 def normalized(text):
@@ -43,6 +43,38 @@ def geometry(pdf: Path, paragraphs, original=False, language="en"):
         if not number and not (identity[0] and len(recurring[identity]) >= 2):
             body_chars.extend(line_chars); body_positions.extend(line_positions)
     full, body = ''.join(chars), ''.join(body_chars)
+    anchors={}
+    for _,name,_,destination in document.get_toc(False):
+        if destination.get('kind')==1 and 'to' in destination:
+            point=destination['to'];anchors[name]=(destination['page'],point.x,point.y)
+    # Remove only PDF line-final hyphens for a secondary exact comparison.
+    dehyphen_chars=[];dehyphen_positions=[]
+    for i,(char,pos) in enumerate(zip(body_chars,body_positions)):
+        if char in '-‐' and i+1<len(body_positions) and body_positions[i+1][1]!=pos[1] and i and body_chars[i-1].isalpha() and body_chars[i+1].isalpha():continue
+        dehyphen_chars.append(char);dehyphen_positions.append(pos)
+    native_streams=[(full,positions),(body,body_positions),(''.join(dehyphen_chars),dehyphen_positions)]
+    def native_run(text,point,native):
+        if not text or point is None:return None
+        for stream,coords in native_streams:
+            matches=[];start=stream.find(text)
+            while start>=0:
+                page,_,box=coords[start]
+                width=native.get('cellWidth') if native.get('inTable') else (pages[point[0]]['width']-point[1] if native.get('inTable') is False else 8)
+                origin=anchors.get(native.get('paragraph'),point)
+                right=origin[1]+width-3 if native.get('inTable') and width else point[1]+max(8,(width or 8)-3)
+                if page==point[0] and box[0]>=point[1]-3 and box[0]<=right and abs(box[1]-point[2])<=18:
+                    matches.append(coords[start:start+len(text)])
+                start=stream.find(text,start+1)
+            if len(matches)==1:return matches[0]
+            if len(matches)>1:return None
+        return None
+    def rects_for(selected):
+        lines=defaultdict(list)
+        for page,line,box in selected:lines[(page,line)].append(box)
+        result=defaultdict(list)
+        for (page,_),boxes in lines.items():
+            result[page].append([min(b[0] for b in boxes),min(b[1] for b in boxes),max(b[2] for b in boxes),max(b[3] for b in boxes)])
+        return result
     eligible = []
     for p in paragraphs:
         if not original and p.get('deleted'): continue
@@ -57,6 +89,47 @@ def geometry(pdf: Path, paragraphs, original=False, language="en"):
         def visible(value):
             for token in p.get('zeroWidthBookmarkTokens', []): value = value.replace(token, '')
             return normalized(value)
+        native=p.get('nativeAnchors')
+        if native:
+            raw=p.get('originalEn' if original else 'en','')
+            units=p.get('originalUnits' if original else 'units',[])
+            if language=='zh' and not original and p.get('translationPolicy')!='skip_reference':
+                raw=p.get('zh') or p.get('en','');units=p.get('targetUnits',[]) if p.get('zh') else []
+            selected=[];unit_coords=defaultdict(list);matched_runs=0
+            valid_units=(native['text']==raw and ''.join(u.get('text','') for u in units)==raw)
+            cursor=0
+            for unit in units:
+                lo,hi=unit.get('start'),unit.get('end')
+                if not isinstance(lo,int) or not isinstance(hi,int) or lo!=cursor or hi<=lo or raw[lo:hi]!=unit.get('text'):
+                    valid_units=False;break
+                cursor=hi
+            valid_units=valid_units and cursor==len(raw) and len({u.get('id') for u in units})==len(units)
+            for run in native['runs']:
+                content=normalized(run['text'])
+                coords=native_run(content,anchors.get(run['name']),native)
+                if coords is None:continue
+                matched_runs+=1;selected.extend(coords)
+                if valid_units:
+                    for unit in units:
+                        lo=max(run['start'],unit['start']);hi=min(run['end'],unit['end'])
+                        if hi<=lo or raw[unit['start']:unit['end']]!=unit['text']:continue
+                        prefix=normalized(run['text'][:lo-run['start']]);part=normalized(run['text'][lo-run['start']:hi-run['start']]);suffix=normalized(run['text'][hi-run['start']:])
+                        if prefix+part+suffix==content:unit_coords[unit['id']].extend(coords[len(prefix):len(prefix)+len(part)])
+            per_page=rects_for(selected)
+            unit_pages=defaultdict(list)
+            for uid,coords in unit_coords.items():
+                for page,rects in rects_for(coords).items():unit_pages[page].append({'id':uid,'rects':rects})
+            for page,rects in per_page.items():
+                pages[page]['regions'].append({'paragraphId':p['id'],'rects':rects,'units':unit_pages[page],
+                    'status':'word-text' if matched_runs==len(native['runs']) else 'word-text-partial'})
+            if per_page:continue
+            point=anchors.get(native['paragraph'])
+            if point and text:
+                page,x,y=point
+                pages[page]['regions'].append({'paragraphId':p['id'],'rects':[[x,y,x+8,y+8]],'units':[],'status':'word-anchor'})
+                continue
+            # Empty source paragraphs intentionally have no invisible clickable area.
+            if not text:unmapped.append(p['id']);continue
         # Very short and numeric-only text is not a reliable page anchor.
         if not text or '⟦' in text or counts[text] != 1 or len(text) < 8 or not any(c.isalpha() for c in text):
             unmapped.append(p['id']); continue
@@ -131,7 +204,7 @@ def native_layout(pdf: Path, paragraphs, cache: Path, revision: int, original=Fa
     if not target.exists(): atomic_write(target, data)
     # Layout is independent of project bookkeeping revision, but sentence IDs,
     # offsets and correspondence groups must invalidate its semantic overlay.
-    fields = ('id', 'originalEn', 'en', 'zh', 'inserted', 'deleted', 'units', 'originalUnits', 'targetUnits', 'groups', 'translationPolicy', 'zeroWidthBookmarkTokens')
+    fields = ('id', 'originalEn', 'en', 'zh', 'inserted', 'deleted', 'units', 'originalUnits', 'targetUnits', 'groups', 'translationPolicy', 'zeroWidthBookmarkTokens', 'nativeAnchors')
     signature = {'original': original, 'language': language,
         'paragraphs': [{k:p.get(k) for k in fields} for p in paragraphs]}
     geometry_key = sha256(VERSION + json.dumps(signature, ensure_ascii=False, sort_keys=True, separators=(',', ':')).encode('utf-8')).hexdigest()

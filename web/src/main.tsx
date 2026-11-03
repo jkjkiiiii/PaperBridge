@@ -501,9 +501,10 @@ function App() {
           if (from.includes(sourceUnit)) (side === "left" ? edge.target_ids : edge.source_ids).forEach(id => corresponding.add(id));
         }
       }
-      const sourceOffset = block.getBoundingClientRect().top - pane.getBoundingClientRect().top;
+      const sourceAnchor = hit.closest<HTMLElement>("[data-unit]") || block;
+      const sourceOffset = sourceAnchor.getBoundingClientRect().top - pane.getBoundingClientRect().top;
       const candidates = Array.from(other.querySelectorAll<HTMLElement>(`[data-block="${id}"]`));
-      const mapped = candidates.filter(el => Array.from(el.querySelectorAll<HTMLElement>("[data-unit]")).some(u => corresponding.has(u.dataset.unit!)));
+      const mapped = candidates.flatMap(el => Array.from(el.querySelectorAll<HTMLElement>("[data-unit]")).filter(u => corresponding.has(u.dataset.unit!)));
       const targetTop = other.getBoundingClientRect().top;
       const target = (mapped.length ? mapped : candidates).sort((a,b) =>
         Math.abs(a.getBoundingClientRect().top - targetTop - sourceOffset) - Math.abs(b.getBoundingClientRect().top - targetTop - sourceOffset))[0];
