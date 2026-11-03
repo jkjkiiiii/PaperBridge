@@ -8,7 +8,7 @@ from uuid import uuid4
 import unicodedata
 import pymupdf
 
-VERSION = b'native-layout-v3'
+VERSION = b'native-layout-v4'
 RASTER_VERSION = b'native-layout-v2'
 
 def normalized(text):
@@ -49,10 +49,14 @@ def geometry(pdf: Path, paragraphs, original=False, language="en"):
         if original and p.get('inserted'): continue
         text = p.get('originalEn' if original else 'en', '')
         if language == 'zh' and not original and p.get('translationPolicy') != 'skip_reference': text = p.get('zh') or p.get('en', '')
+        for token in p.get('zeroWidthBookmarkTokens', []): text = text.replace(token, '')
         eligible.append((p, normalized(text)))
     counts = Counter(text for _, text in eligible)
     unmapped = []
     for p, text in eligible:
+        def visible(value):
+            for token in p.get('zeroWidthBookmarkTokens', []): value = value.replace(token, '')
+            return normalized(value)
         # Very short and numeric-only text is not a reliable page anchor.
         if not text or '⟦' in text or counts[text] != 1 or len(text) < 8 or not any(c.isalpha() for c in text):
             unmapped.append(p['id']); continue
@@ -97,7 +101,7 @@ def geometry(pdf: Path, paragraphs, original=False, language="en"):
         if valid:
             for unit in units:
                 lo, hi = unit['start'], unit['end']
-                prefix, content, suffix = normalized(raw[:lo]), normalized(raw[lo:hi]), normalized(raw[hi:])
+                prefix, content, suffix = visible(raw[:lo]), visible(raw[lo:hi]), visible(raw[hi:])
                 # Normalization can combine characters across a boundary. Only
                 # accept offsets when normalization is compositional here.
                 if prefix + content + suffix != text: continue
@@ -127,7 +131,7 @@ def native_layout(pdf: Path, paragraphs, cache: Path, revision: int, original=Fa
     if not target.exists(): atomic_write(target, data)
     # Layout is independent of project bookkeeping revision, but sentence IDs,
     # offsets and correspondence groups must invalidate its semantic overlay.
-    fields = ('id', 'originalEn', 'en', 'zh', 'inserted', 'deleted', 'units', 'originalUnits', 'targetUnits', 'groups', 'translationPolicy')
+    fields = ('id', 'originalEn', 'en', 'zh', 'inserted', 'deleted', 'units', 'originalUnits', 'targetUnits', 'groups', 'translationPolicy', 'zeroWidthBookmarkTokens')
     signature = {'original': original, 'language': language,
         'paragraphs': [{k:p.get(k) for k in fields} for p in paragraphs]}
     geometry_key = sha256(VERSION + json.dumps(signature, ensure_ascii=False, sort_keys=True, separators=(',', ':')).encode('utf-8')).hexdigest()

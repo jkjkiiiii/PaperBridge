@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1440" viewBox="0 0 1080 1440">
+<rect width="1080" height="1440" fill="#f5f3ed"/>
+<g font-family="Microsoft YaHei, PingFang SC, sans-serif" fill="#152b3a">
+<text x="80" y="110" font-size="30" fill="#15796e">PAPERBRIDGE / 实测记录</text>
+<text x="80" y="225" font-size="62" font-weight="700">一篇论文的</text>
+<text x="80" y="310" font-size="62" font-weight="700">双语对应，花了多少？</text>
+<text x="80" y="515" font-size="158" font-weight="700">≈ ¥0.12</text>
+<text x="85" y="585" font-size="33" fill="#15796e">DeepSeek Flash 句子映射消费</text>
+<rect x="80" y="665" width="920" height="325" rx="24" fill="white"/>
+<text x="120" y="730" font-size="31">样本：Attention Is All You Need</text>
+<text x="120" y="800" font-size="29">火山初译：27,490 字符</text>
+<text x="120" y="865" font-size="29">DeepSeek 映射：98,982 tokens</text>
+<text x="120" y="930" font-size="29">40 条参考文献及标题跳过翻译与映射</text>
+<g font-size="24" fill="#536674">
+<text x="80" y="1070">2026-11-04 单次实测 · 可编辑 Word 重建稿</text>
+<text x="80" y="1115">约 ¥0.12 经使用者核对控制台；不含后续编辑回写。</text>
+<text x="80" y="1160">火山费用取决于剩余免费额度。译文仍需人工校对。</text>
+<text x="80" y="1205">两段修复复测另计约 ¥0.0029；非固定单篇定价。</text>
+</g>
+<text x="80" y="1340" font-size="27" fill="#15796e">github.com/jkjkiiiii/PaperBridge</text>
+</g></svg>

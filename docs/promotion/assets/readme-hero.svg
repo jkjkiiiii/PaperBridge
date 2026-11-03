@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="520" viewBox="0 0 1440 520">
+<rect width="1440" height="520" rx="28" fill="#f5f3ed"/>
+<g font-family="Microsoft YaHei, PingFang SC, sans-serif">
+<text x="78" y="85" font-size="25" fill="#15796e" font-weight="700">纸桥 / PaperBridge</text>
+<text x="78" y="188" font-size="59" fill="#152b3a" font-weight="700">读中文，改中文。</text>
+<text x="78" y="270" font-size="59" fill="#152b3a" font-weight="700">让修改回到英文 Word。</text>
+<text x="80" y="337" font-size="24" fill="#536674">双语对照 · 局部回写 · 单词级 diff · DOCX 副本导出</text>
+<rect x="80" y="390" width="330" height="48" rx="24" fill="#15796e"/>
+<text x="106" y="422" font-size="20" fill="white">开源 / 本地运行 / 自选 API</text>
+<rect x="935" y="82" width="420" height="350" rx="18" fill="white" stroke="#dedfd8"/>
+<text x="968" y="132" font-size="19" fill="#536674">原创功能演示</text>
+<text x="968" y="188" font-size="25" fill="#152b3a">我们的方法</text>
+<text x="968" y="228" font-size="25" fill="#b94b50" text-decoration="line-through">彻底解决了模型幻觉。</text>
+<text x="968" y="275" font-size="25" fill="#25784e">在测试集上减少了模型幻觉。</text>
+<path d="M970 303 H1318" stroke="#dedfd8"/>
+<text x="968" y="344" font-size="22" fill="#152b3a">Our method reduces hallucinations</text>
+<text x="968" y="377" font-size="22" fill="#25784e">on the test set.</text>
+<text x="968" y="409" font-size="15" fill="#536674">示意句子，非真实研究结论</text>
+</g></svg>

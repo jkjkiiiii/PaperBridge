@@ -17,3 +17,6 @@ coverage.xml
 *.local
 .DS_Store
 Thumbs.db
+
+# Local generated download bundle; sources and individual images are versioned.
+/docs/promotion/PaperBridge-promotion-kit.zip

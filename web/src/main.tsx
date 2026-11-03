@@ -1379,7 +1379,7 @@ function App() {
                     if (pointerSource.current?.side === source) schedulePointerAlignment(source);
                   }}
                 >
-                  {nativeView ? <NativePages stateKey={project.paragraphs.map(p=>`${p.id}:${p.revision}:${p.status}`).join("|")} projectId={project.id} revision={project.revision} original={side === "en" && original} language={side} active={active} editing={editing} highlighted={(selection || hover)?.pid || null} onSelect={(id) => {
+                  {nativeView ? <NativePages diff={diff} stateKey={project.paragraphs.map(p=>`${p.id}:${p.revision}:${p.status}`).join("|")} projectId={project.id} revision={project.revision} original={side === "en" && original} language={side} active={active} editing={editing} highlighted={(selection || hover)?.pid || null} onSelect={(id) => {
                     scrollOwner.current = null; setActive(id); const p = project.paragraphs.find(p => p.id === id);
                     if (p && !p.deleted && p.status !== "untranslated" && p.translationPolicy !== "skip_reference") setEditing(id);
                   }} onHover={(id, unit) => {

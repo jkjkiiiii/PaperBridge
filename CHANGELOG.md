@@ -2,6 +2,17 @@
 
 ## Unreleased
 
+### Word preview and documentation — 2026-11-04
+
+- Add red-deletion/green-insertion diff to English and Chinese native Word previews, using the same word-first English policy as structural editing.
+- Keep diff previews and caches separate from clean DOCX exports; show inserted/deleted paragraphs and use paragraph-level coordinates for changed text.
+- Recover paragraph and sentence coordinates around verified zero-width Word bookmarks, including existing projects; preserve protected objects in exports.
+- Increase sentence correspondence color contrast and add stronger hover/selection outlines.
+- Refresh README with native diff screenshots, behavior limits, service configuration and promotion resources.
+- Add eight 9:16 promotion cards in 1080×1920 and 2160×3840, editable layout sources, attributed demo captures and revised Chinese social copy.
+- Validate with 130 backend tests, 4 frontend tests and a production frontend build.
+
+
 - Recognize ASCII sentence punctuation immediately before Chinese while preserving abbreviations and decimals.
 - Distinguish valid merged/split sentence mappings from unresolved ambiguity; retain quality notes and fallback diagnostics.
 - Re-segment committed translations during alignment repair without retranslating or changing text.

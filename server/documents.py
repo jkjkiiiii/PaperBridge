@@ -125,6 +125,15 @@ def extract(data):
     from .reference_policy import detect_references
     return detect_references(paragraphs)
 
+def zero_width_bookmark_tokens(data):
+    """Trust XML node types, never token spelling or user-supplied metadata."""
+    _, root = load_package(data)
+    elements = root.xpath('//w:body//w:p[not(ancestor::w:p)]', namespaces=NS)
+    return {f'p{i+1:05}': [a['text'] for a in atoms(p)
+            if a['protected'] and a['node'].tag in (tag('bookmarkStart'), tag('bookmarkEnd'))]
+            for i, p in enumerate(elements)}
+
+
 def extract_layout(data):
     """Reading-order document tree; IDs share the immutable extraction baseline."""
     _, root = load_package(data)

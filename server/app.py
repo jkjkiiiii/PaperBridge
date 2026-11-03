@@ -282,15 +282,28 @@ def preview(pid:str, original:bool=True):
         'X-Project-Revision':str(p['revision']), 'Cache-Control':'no-store'})
 
 @app.get('/api/projects/{pid}/native-layout')
-def native_pages(pid: str, original: bool = False, language: str = "en"):
+def native_pages(pid: str, original: bool = False, language: str = "en", diff: bool = False):
     p = store.get(pid)
     if language not in ('en', 'zh'): raise HTTPException(status_code=422, detail='Unsupported language')
     if language == 'zh' and original: raise HTTPException(status_code=422, detail='Original document is English')
     snapshot, pending = committed_preview(p)
-    data = build_chinese_preview(store.source(p), snapshot['paragraphs']) if language == 'zh' else (store.source(p) if original else export_docx(store.source(p), snapshot['paragraphs']))
+    if any(x.get('protected') for x in snapshot['paragraphs']):
+        from .documents import zero_width_bookmark_tokens
+        bookmarks = zero_width_bookmark_tokens(store.source(p))
+        for item in snapshot['paragraphs']:
+            item['zeroWidthBookmarkTokens'] = bookmarks.get(item['id'], [])
+    diff = diff and not original
+    changed = []
+    if diff:
+        from .diff_preview import build_diff_preview
+        data, geometry_paragraphs, changed = build_diff_preview(store.source(p), snapshot['paragraphs'], language)
+    else:
+        data = build_chinese_preview(store.source(p), snapshot['paragraphs']) if language == 'zh' else (store.source(p) if original else export_docx(store.source(p), snapshot['paragraphs']))
+        geometry_paragraphs = snapshot['paragraphs']
     try:
         pdf = render_preview(data, DATA/'previews')
-        result = native_layout(pdf, snapshot['paragraphs'], DATA/'native-pages', p['revision'], original, language)
+        result = native_layout(pdf, geometry_paragraphs, DATA/'native-pages', p['revision'], original, language)
+        result.update(diff=diff, diffParagraphs=changed, diffMapping='paragraph-only-for-changed' if diff else None)
         result.update(pendingParagraphs=pending, disabledUnitParagraphs=[x['id'] for x in pending], snapshotKind='last-synced' if pending else 'current')
         return result
     except PreviewError as exc:

@@ -7,12 +7,12 @@
   --muted: #819090;
   --teal: #287a70;
   --line: #e5ebe8;
-  --c0: #dbedf7;
-  --c1: #e9e0f5;
-  --c2: #fae8d0;
-  --c3: #d9eee5;
-  --c4: #f5dfe8;
-  --c5: #e7ecc9;
+  --c0: #80c9ef;
+  --c1: #bca0e6;
+  --c2: #f0bc71;
+  --c3: #7dccaf;
+  --c4: #e89dbb;
+  --c5: #c1d66e;
 }
 * {
   box-sizing: border-box;

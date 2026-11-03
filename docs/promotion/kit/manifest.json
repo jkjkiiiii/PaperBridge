@@ -1,0 +1,23 @@
+{
+  "size": [
+    1080,
+    1920
+  ],
+  "images": [
+    "01-cover-9x16.png",
+    "02-read-9x16.png",
+    "03-edit-9x16.png",
+    "04-diff-9x16.png",
+    "05-export-9x16.png",
+    "06-services-9x16.png",
+    "07-cost-9x16.png",
+    "08-start-9x16.png"
+  ],
+  "date": "2026-11-04",
+  "cost_basis": "Single DeepSeek alignment run; user verified approximately CNY 0.12; excludes subsequent rewrites.",
+  "high_resolution": [
+    2160,
+    3840
+  ],
+  "revision": "local diff and 2x rerender"
+}

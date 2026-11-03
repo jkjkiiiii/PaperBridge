@@ -50,3 +50,25 @@ def test_native_api_snapshot_and_raster(tmp_path, monkeypatch):
         assert client.get('/api/projects/demo/native-layout?language=fr').status_code==422
         assert client.get('/api/projects/demo/native-layout?language=zh&original=true').status_code==422
         assert client.get('/api/native-page/not-a-hash/0.png').status_code==404
+
+
+def test_only_xml_verified_bookmarks_are_invisible(tmp_path):
+    from server.documents import split_units, zero_width_bookmark_tokens, tag
+    from docx import Document
+    from lxml import etree as E
+    from io import BytesIO
+    d=Document();p=d.add_paragraph('A unique scientific sentence.')
+    E.SubElement(p._p,tag('bookmarkStart')).set(tag('id'),'0')
+    E.SubElement(p._p,tag('bookmarkEnd')).set(tag('id'),'0')
+    E.SubElement(p._p,tag('drawing'))
+    b=BytesIO();d.save(b)
+    safe=zero_width_bookmark_tokens(b.getvalue())['p00001']
+    assert safe==['⟦P000⟧','⟦P001⟧']
+    pdf=tmp_path/'source.pdf';make_pdf(pdf)
+    raw='A unique ⟦P000⟧scientific⟦P001⟧ sentence.'
+    item={'id':'p1','en':raw,'units':split_units(raw,'u'),'zeroWidthBookmarkTokens':safe}
+    result=native_layout(pdf,[item],tmp_path/'cache',0)
+    assert result['unmapped']==[]
+    assert len(result['pages'][0]['regions'][0]['units'])==1
+    item['en'] += '⟦P002⟧'
+    assert native_layout(pdf,[item],tmp_path/'cache',0)['unmapped']==['p1']
