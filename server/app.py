@@ -20,6 +20,7 @@ from .preview import render_preview, PreviewError
 from .native_layout import native_layout, raster_page
 from .preview_state import committed_preview
 from .retranslation import RetranslationJobs
+from .translation_router import TranslationRouter
 
 ROOT=Path(__file__).resolve().parents[1]
 DATA=Path(os.environ.get('WORDMODIF_DATA',str(ROOT/'.data')))
@@ -81,8 +82,9 @@ def project(pid:str): return store.get(pid)
 
 @app.post('/api/projects/{pid}/retranslate')
 async def retranslate(pid: str):
-    project = retranslation_jobs.create(store, client, store.get(pid))
-    retranslation_jobs.launch(store, client, project, translation_candidate, context_for)
+    router = TranslationRouter(client, DATA)
+    project = retranslation_jobs.create(store, router, store.get(pid))
+    retranslation_jobs.launch(store, router, project, translation_candidate, context_for)
     return project
 
 @app.post('/api/projects/{pid}/retranslate/stop')
@@ -98,7 +100,7 @@ async def resume_retranslation(pid: str):
     project = store.get(pid)
     if not project.get('retranslation'): raise StateError('这不是全文重译项目。')
     retranslation_jobs.resume(store, project)
-    retranslation_jobs.launch(store, client, project, translation_candidate, context_for)
+    retranslation_jobs.launch(store, TranslationRouter(client, DATA), project, translation_candidate, context_for)
     return project
 
 @app.post('/api/projects/{pid}/paragraphs/{paragraph}/draft')
@@ -108,6 +110,20 @@ async def draft(pid:str,paragraph:str,body:dict):
 @app.post('/api/projects/{pid}/paragraphs/{paragraph}/action')
 async def action(pid:str,paragraph:str,body:dict):
     p=store.get(pid); item=store.paragraph(p,paragraph); action=body['action']
+    if action=='translation_policy':
+        from .reference_policy import detect_references
+        policy=body.get('policy')
+        if policy not in ('translate','skip_reference'): raise StateError('无效的翻译策略。')
+        if item['status']=='running': raise StateError('请等待当前模型任务结束后修改翻译策略。')
+        if policy=='skip_reference' and item.get('draftZh','')!=item.get('zh',''):
+            raise StateError('请先完成或撤销中文草稿，再跳过此段。')
+        store.checkpoint(item); item['translationPolicyOverride']=policy
+        if policy=='translate':
+            item['units']=split_units(item['en'],item['id']+'_')
+            item['originalUnits']=split_units(item['originalEn'],item['id']+'_')
+            item['status']='ready' if item.get('zh') else 'untranslated'
+        detect_references(p['paragraphs']); item['revision']+=1
+        store.event(p,item,'translation_policy',{'policy':policy}); store.save(p); return p
     if action in ('undo','redo'): return store.undo(p,paragraph,action=='redo')
     if action=='insert': return store.insert(p,paragraph)
     if action=='delete': return store.delete(p,paragraph)
@@ -124,8 +140,11 @@ async def action(pid:str,paragraph:str,body:dict):
 
 def context_for(p,item):
     idx=p['paragraphs'].index(item)
-    return {'previous':p['paragraphs'][idx-1]['originalEn'][-600:] if idx else '',
-        'next':p['paragraphs'][idx+1]['originalEn'][:600] if idx+1<len(p['paragraphs']) else ''}
+    def context_at(index):
+        if not 0 <= index < len(p['paragraphs']): return ''
+        other=p['paragraphs'][index]
+        return '' if other.get('translationPolicy')=='skip_reference' else other['originalEn']
+    return {'previous':context_at(idx-1)[-600:], 'next':context_at(idx+1)[:600]}
 
 def translation_candidate(item,data):
     if data.get('unresolved'): raise StateError('模型报告歧义：'+'；'.join(map(str,data['unresolved'])))
@@ -171,6 +190,7 @@ def rewrite_candidate(item,data,targets,allowed,anchors):
 @app.post('/api/projects/{pid}/paragraphs/{paragraph}/model')
 async def run_model(pid:str,paragraph:str,body:dict):
     p=store.get(pid); item=store.paragraph(p,paragraph); task=body.get('task','rewrite_en')
+    if item.get('translationPolicy')=='skip_reference': raise StateError('参考文献已跳过，不调用翻译或句子映射。')
     if task not in TASKS: raise StateError('未知模型任务')
     if item['deleted']: raise StateError('段落已删除')
     if item['status']=='running': raise StateError('此段已有请求正在执行')
@@ -178,9 +198,13 @@ async def run_model(pid:str,paragraph:str,body:dict):
     snapshot=deepcopy(item); revision=item['revision']; job=uuid4().hex
     model_settings=client.read_settings()
     targets=[]; allowed=[]; anchors=[]
-    payload={'paragraph_id':paragraph,'revision':revision,'context':context_for(p,item),'protected_tokens':item['protected']}
+    payload={'paragraph_id':paragraph,'revision':revision,'context':context_for(p,item),'protected_tokens':item['protected'],'translationPolicy':item.get('translationPolicy','translate')}
     if task=='translate_align': payload['source_units']=item['units']
-    elif task=='repair_alignment': payload.update(source_units=item['units'],target_units=item['targetUnits'])
+    elif task=='repair_alignment':
+        # Re-segment the committed fixed text with the current boundary rules;
+        # old projects may contain merged units from an earlier splitter.
+        targets=split_units(item['zh'],f'{paragraph}_a{revision}_')
+        payload.update(source_units=item['units'],target_units=targets)
     else:
         try: allowed,anchors=impact(item,body.get('allowedIds'))
         except StateError as exc:
@@ -193,13 +217,17 @@ async def run_model(pid:str,paragraph:str,body:dict):
     try:
         for attempt in range(2):
             try:
-                response=await client.generate(task,payload,settings=model_settings,cache=not body.get('noCache',False))
+                response=await TranslationRouter(client, DATA).generate(task,payload,settings=model_settings,cache=not body.get('noCache',False))
                 if task=='translate_align': candidate=translation_candidate(snapshot,response['data'])
                 elif task=='rewrite_en': candidate=rewrite_candidate(snapshot,response['data'],targets,allowed,anchors)
                 else:
                     if response['data'].get('unresolved'): raise StateError('模型仍无法确定映射，请手工修正')
-                    candidate=deepcopy(snapshot); candidate['groups']=validate_links(snapshot['units'],snapshot['targetUnits'],response['data'].get('links'),snapshot['groups'])
+                    candidate=deepcopy(snapshot); candidate['groups']=validate_links(snapshot['units'],targets,response['data'].get('links'),snapshot['groups'])
+                    candidate['targetUnits']=targets
                     candidate['status']='pending' if candidate['draftZh']!=candidate['zh'] else 'ready'; candidate['error']=''
+                    response['meta']={**snapshot.get('modelMeta',{}), 'alignmentMethod':'llm',
+                        'alignmentModel':response['meta'], 'alignmentNotes':response['data'].get('notes',[]),
+                        'alignmentWarning':'', 'alignmentFailure':None}
                 break
             except (StateError,ModelOutputError) as exc:
                 if attempt: raise
@@ -224,6 +252,7 @@ async def run_model(pid:str,paragraph:str,body:dict):
 @app.post('/api/projects/{pid}/paragraphs/{paragraph}/mapping')
 async def manual_mapping(pid:str,paragraph:str,body:dict):
     p=store.get(pid); item=store.paragraph(p,paragraph)
+    if item.get('translationPolicy')=='skip_reference': raise StateError('参考文献不建立句子映射。')
     if body.get('revision')!=item['revision']: raise StateError('映射已过期，请重新打开')
     groups=validate_links(item['units'],item['targetUnits'],body['links'],item['groups'])
     store.checkpoint(item); item.update(groups=groups,revision=item['revision']+1,error='',mappingSource='manual',
@@ -367,6 +396,18 @@ def settings():
     return s
 
 
+@app.get('/api/task-assignments')
+def task_assignments_get():
+    from .task_assignments import read_task_assignments
+    return read_task_assignments(DATA, client.read_settings())
+
+
+@app.post('/api/task-assignments')
+def task_assignments_save(body:dict):
+    from .task_assignments import save_task_assignments
+    return save_task_assignments(DATA, body, client.read_settings())
+
+
 @app.get('/api/provider-catalog')
 def provider_catalog(): return catalog()
 
@@ -404,7 +445,11 @@ def validate_model_settings(config):
 
 @app.post('/api/settings')
 async def set_settings(body:dict):
-    config=deepcopy(body); validate_model_settings(config); secret_file=DATA/'secrets.json'
+    config=deepcopy(body); config.pop('translation',None); validate_model_settings(config); secret_file=DATA/'secrets.json'
+    from .task_assignments import validate_profile_removal
+    validate_profile_removal(DATA, config)
+    if (DATA/'task-assignments.json').exists():
+        config['routes'] = client.read_settings()['routes']
     secrets=json.loads(secret_file.read_text('utf-8-sig')) if secret_file.exists() else {}
     for provider in config.get('providers',[]):
         if not provider.get('baseUrl','').startswith(('http://','https://')): raise StateError('接口地址必须为 HTTP(S) URL')
@@ -447,6 +492,40 @@ async def discover_draft(body:dict):
     draft['id']='draft-discovery'
     draft['apiKey']=key or 'local'
     return {'models':await client.models(draft)}
+
+@app.get('/api/translation-services/catalog')
+def translation_services_catalog():
+    from .translation_services import translation_catalog
+    return translation_catalog()
+
+
+@app.get('/api/translation-settings')
+def translation_settings_get():
+    from .translation_settings import public_settings
+    return public_settings(DATA)
+
+
+@app.post('/api/translation-settings')
+def translation_settings_save(body:dict):
+    from .translation_settings import save_translation_settings
+    return save_translation_settings(DATA, body)
+
+
+@app.post('/api/translation-settings/test')
+async def translation_settings_test(body:dict):
+    import time
+    from .translation_settings import read_translation_settings, read_translation_secrets
+    from .translation_services import translate
+    selected=body.get('providerId','llm'); started=time.monotonic()
+    if selected=='llm':
+        result=await client.generate('translate_align', {'paragraph_id':'translation-service-test','source_units':[{'id':'s1','text':'The sample contains two cells.'}]},cache=False)
+        candidate=translation_candidate({'units':[{'id':'s1','text':'The sample contains two cells.'}],'en':'The sample contains two cells.'},result['data'])
+        return {'ok':True,'translation':candidate['zh'],'seconds':round(time.monotonic()-started,2)}
+    provider=next((p for p in read_translation_settings(DATA)['providers'] if p['id']==selected),None)
+    if provider is None:raise StateError('翻译服务配置不存在。')
+    translated=await translate(['The sample contains two cells.'],'en','zh',provider,read_translation_secrets(DATA).get(selected,{}))
+    return {'ok':True,'translation':translated[0],'seconds':round(time.monotonic()-started,2),'service':provider['kind']}
+
 
 DIST=ROOT/'web'/'dist'
 if DIST.exists():

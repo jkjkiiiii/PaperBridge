@@ -87,3 +87,11 @@ def test_split_preserves_abbreviations_and_unicode():
     t='Dr. Smith et al. measured 1.5 mg. The result 🧬 was stable.'
     u=split_units(t,'x');assert len(u)==2;assert ''.join(x['text'] for x in u)==t
     assert all(t[x['start']:x['end']]==x['text'] for x in u)
+
+
+def test_split_ascii_punctuation_before_han_keeps_exact_offsets():
+    text='数值为1.5，参见Fig.图示。代价为 ⟦P000⟧.然而代价下降至 ⟦P001⟧.即使如此。'
+    units=split_units(text,'z')
+    assert [u['text'] for u in units]==['数值为1.5，参见Fig.图示。','代价为 ⟦P000⟧.','然而代价下降至 ⟦P001⟧.','即使如此。']
+    assert ''.join(u['text'] for u in units)==text
+    assert all(text[u['start']:u['end']]==u['text'] for u in units)

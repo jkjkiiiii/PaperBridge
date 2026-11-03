@@ -18,6 +18,29 @@ def http(tmp_path,monkeypatch):
 def uploaded(c):
     r=c.post('/api/projects',files={'file':('sample.docx',fixture_doc())});assert r.status_code==200;return r.json()
 
+
+def test_repair_resegments_fixed_text_without_resetting_translation(http,monkeypatch):
+    p=uploaded(http); item=p['paragraphs'][1]
+    merged=api.translation_candidate(item,{'target_units':[{'id':'old','text':'我爱你.我们住在北京。',
+        'source_ids':[u['id'] for u in item['units']]}],'unresolved':[]})
+    merged['modelMeta']={'model':'MT provider','translationService':{'id':'mt','kind':'volcengine'},
+                         'alignmentMethod':'paragraph-fallback','alignmentWarning':'Old warning'}
+    p['paragraphs'][1]=merged;api.store.save(p)
+    async def generate(self,task,payload,**kwargs):
+        assert task=='repair_alignment'
+        assert [u['text'] for u in payload['target_units']]==['我爱你.','我们住在北京。']
+        return {'data':{'links':[{'source_ids':[s['id']],'target_ids':[t['id']]}
+            for s,t in zip(payload['source_units'],payload['target_units'])],
+            'unresolved':[],'notes':['Boundary restored.']},'meta':{'model':'Mapping model'}}
+    monkeypatch.setattr(ModelClient,'generate',generate)
+    result=http.post(f'/api/projects/{p["id"]}/paragraphs/{item["id"]}/model',json={'task':'repair_alignment'}).json()['paragraphs'][1]
+    assert len(result['targetUnits'])==2 and [g['kind'] for g in result['groups']]==['1:1','1:1']
+    assert all(result[k]==merged[k] for k in ('en','zh','initialZh','draftZh'))
+    assert result['modelMeta']['model']=='MT provider'
+    assert result['modelMeta']['alignmentModel']['model']=='Mapping model'
+    assert not result['modelMeta']['alignmentWarning']
+    assert result['modelMeta']['alignmentNotes']==['Boundary restored.']
+
 def test_config_replay_and_idempotence(http):
     p=uploaded(http);pid=p['id'];item=p['paragraphs'][1]
     config={'schemaVersion':'1.0','sourceSha256':p['sourceSha256'],'operations':[{'type':'replace_text','paragraphId':item['id'],'beforeEn':item['en'],'afterEn':item['en'].replace('you','her')}],'paragraphStates':[]}

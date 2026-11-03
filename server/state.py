@@ -9,6 +9,7 @@ from uuid import uuid4
 from datetime import datetime, timezone
 from jsonschema import validate, ValidationError
 from .documents import extract, extract_layout, split_units, TOKEN, export_docx, DocumentError
+from .reference_policy import detect_references, is_skipped_reference
 
 class StateError(ValueError): pass
 CONFIG_SCHEMA={'type':'object','required':['schemaVersion','sourceSha256','operations'],
@@ -212,6 +213,7 @@ class Store:
         for item in result['paragraphs']:
             item.setdefault('originalUnits',split_units(item['originalEn'],item['id']+'_'))
             preserve_numeric_cell(item, result.get('events', []))
+        detect_references(result['paragraphs'])
         if 'layout' not in result:
             result['layout'] = extract_layout(self.source(result))
         return result
@@ -238,6 +240,7 @@ class Store:
     def checkpoint(self,item): item['history'].append(self.snapshot(item)); item['redo']=[]
     def draft(self,p,pid,text,revision):
         item=self.paragraph(p,pid)
+        if is_skipped_reference(item): raise StateError('参考文献保留英文，不参与翻译或回写；如识别有误，请先设为参与翻译。')
         if item['revision'] != revision: raise StateError('编辑版本已变化，请刷新后重试')
         if item['deleted']: raise StateError('不能编辑已删除段落')
         if item['status']=='untranslated' and not item['inserted']: raise StateError('请先翻译该段落')

@@ -90,9 +90,13 @@ def split_units(text, prefix):
     """Offsets are Python Unicode code points; preserve every character exactly."""
     boundaries = []
     abbreviations = {'dr.', 'mr.', 'mrs.', 'prof.', 'fig.', 'figs.', 'eq.', 'eqs.', 'al.', 'vs.', 'e.g.', 'i.e.', 'etc.'}
-    for m in re.finditer(r'[.!?。！？]+[\"”’\)\]]*(?:\s+|$)|[。！？]+', text):
+    # Machine translations can place ASCII punctuation directly before Han
+    # characters (e.g. a preserved formula followed by '.然而'). Keep the
+    # existing decimal/abbreviation safeguards while recognizing this boundary.
+    for m in re.finditer(r'[.!?。！？]+[\"”’\)\]]*(?:\s+|$)|[.!?]+[\"”’\)\]]*(?=[\u3400-\u9fff])|[。！？]+', text):
         end = m.end(); before = text[:m.start()+1]
-        word = before.split()[-1].lower() if before.split() else ''
+        tail = re.search(r'[A-Za-z]+(?:\.[A-Za-z]+)*\.$', before)
+        word = tail.group().lower() if tail else ''
         if word in abbreviations or re.search(r'(?:\b[A-Za-z]\.){1,}$', before): continue
         boundaries.append(end)
     boundaries.append(len(text))
@@ -118,7 +122,8 @@ def extract(data):
             'paragraphStyle': pstyle.get(tag('val')) if pstyle is not None else 'Normal',
             'runs': [{k: a[k] for k in ('text', 'start', 'end', 'protected', 'style')} for a in aa],
             'protected': TOKEN.findall(text), 'hasSection': p.find('w:pPr/w:sectPr', NS) is not None})
-    return paragraphs
+    from .reference_policy import detect_references
+    return detect_references(paragraphs)
 
 def extract_layout(data):
     """Reading-order document tree; IDs share the immutable extraction baseline."""
@@ -251,6 +256,8 @@ def build_chinese_preview(data, paragraphs):
     preview = deepcopy(paragraphs)
     for item in preview:
         if item.get('deleted'):
+            continue
+        if item.get('translationPolicy') == 'skip_reference':
             continue
         if item.get('status') in ('pending', 'running', 'failed', 'needs_alignment', 'conflict') or item.get('draftZh', '') != item.get('zh', ''):
             raise DocumentError('中文页面有未同步修改，请先完成回写。')

@@ -1,5 +1,21 @@
 # Changelog
 
+## Unreleased
+
+- Recognize ASCII sentence punctuation immediately before Chinese while preserving abbreviations and decimals.
+- Distinguish valid merged/split sentence mappings from unresolved ambiguity; retain quality notes and fallback diagnostics.
+- Re-segment committed translations during alignment repair without retranslating or changing text.
+- Document the full-paper Attention experiment: 98,982 DeepSeek tokens and user-confirmed approximate ¥0.12 consumption, with separately metered two-paragraph repair.
+
+- Centralize initial translation, sentence mapping and English rewrite selection in task assignments.
+- Add queued MT request-rate, character and text-item limits, distinct from concurrency.
+
+- Separate machine-translation service selection from general LLM configuration.
+- Add signed Volcengine TranslateText, DeepL, Azure Translator and self-hosted LibreTranslate adapters.
+- Align fixed machine translations using the selected general LLM, with an explicit paragraph-level fallback.
+- Pin both translation and LLM settings for full-document retranslation, with isolated local credentials.
+- Add a dedicated DeepSeek provider tab and documented API defaults.
+
 ## [0.1.0] — 2026-11-03
 
 First public source release of **PaperBridge**.

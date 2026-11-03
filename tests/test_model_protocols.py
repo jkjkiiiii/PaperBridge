@@ -9,6 +9,16 @@ import server.app as api
 
 RESULT = {'target_units':[{'id':'z1','text':'两个细胞。','source_ids':['s1']}], 'unresolved':[]}
 
+
+@pytest.mark.parametrize('protocol',['openai_chat','openai_responses'])
+def test_alignment_notes_valid_for_strict_schemas(protocol):
+    from server.llm import SCHEMAS
+    _,body=request_body({'protocol':protocol},{'model':'test','outputMode':'schema'},'repair_alignment','template','{}')
+    schema=(body['text']['format'] if protocol=='openai_responses' else body['response_format']['json_schema'])['schema']
+    assert set(schema['required'])==set(schema['properties'])
+    assert 'notes' in schema['required']
+    assert 'notes' not in SCHEMAS['repair_alignment']['required']
+
 @pytest.mark.parametrize('protocol,path', [('openai_chat','/chat/completions'),('openai_responses','/responses'),('anthropic_messages','/messages')])
 def test_protocol_generation(tmp_path, monkeypatch, protocol, path):
     client = ModelClient(tmp_path)

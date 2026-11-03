@@ -945,3 +945,9 @@ footer span {
 
 .retranslation-progress {display:flex;align-items:center;gap:14px;padding:10px 24px;background:#eef5ed;flex-wrap:wrap;font-size:12px;}
 .retranslation-progress button {padding:4px 9px;}
+
+.translation-alignment-warning { padding:8px 10px; margin:6px 0; color:#78561c; background:#fff3d8; border:1px solid #e7d5a3; font-size:12px; line-height:1.5; }
+.translation-provenance { display:block; color:#698071; font-size:10px; margin:4px 0; }
+
+.reference-preserved small { display:block; font-size:11px; color:#728274; margin-bottom:5px; }
+.reference-preserved button { font-size:11px; margin-top:6px; }

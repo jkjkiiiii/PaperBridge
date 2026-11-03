@@ -42,6 +42,21 @@ Word 原生版面由本机 Microsoft Word 排版，保留页面中的表格、�
 
 ![Attention Is All You Need：双语编辑差异](docs/assets/attention-diff.png)
 
+## 全论文实测：翻译与句子映射
+
+2026 年 11 月 4 日，我们用 [*Attention Is All You Need*](https://arxiv.org/abs/1706.03762) 的可编辑 Word 重建稿，运行了一次火山文本翻译初译 + DeepSeek Flash 句子映射。DeepSeek 控制台显示本次费用约 **¥0.12**。
+
+| 本次样本 | 实测结果 |
+| --- | --- |
+| 火山初译 | 178 次请求，27,490 字符 |
+| DeepSeek 句子映射 | 178 次请求，98,982 tokens（输入 91,124，输出 7,858） |
+| 参考文献 | 40 条及标题跳过翻译和映射，调用 0 次 |
+| 用时 | 顺序请求约 5 分 51 秒 |
+
+首次运行的两处映射降级已定位并单独复测：一段恢复为 5 组 `1:1`，另一段保留合理的 `2:1` 合句对应，中英文文字不变；复测新增约 ¥0.0029，单独计量。
+
+这是一次测量，并非所有论文的费用、速度或翻译质量保证。火山费用取决于账号剩余免费额度；本次未核实剩余额度。机器直译存在专业术语错误，正式使用前需要人工审校。Word 是依据论文源码制作的可编辑重建稿，不是官方 Word，也不保证与原 PDF 像素一致。范围、映射降级和计费细节见 [完整实测说明](docs/attention-cost-case.md)。
+
 ## 能做什么
 
 | 能力 | 使用方式 |
@@ -102,11 +117,16 @@ python -m uvicorn server.app:app --host 127.0.0.1 --port 17865
 | **OpenAI** | 默认 Responses，也支持 Chat Completions |
 | **Anthropic** | 原生 Messages，结构化工具结果 |
 | **Google Gemini** | 原生 `generateContent`，AI Studio API Key |
+| **DeepSeek** | 官方 Chat Completions、JSON Object、账号模型发现 |
 | **LM Studio / 自定义服务** | 自定义地址、协议与模型 ID |
 
 模型下拉优先读取当前账号可用列表，也允许填写自定义 ID。各厂商密钥独立保存，切换标签不会把本地模型密钥带到云端。
 
 更换模型只影响后续任务，**不会自动覆盖已有译文**。要重做全文，使用 **重新翻译全文**。Kimi Code 会员与开放平台是独立服务；后台批量重译使用开放平台。接入依据见 [厂商适配说明](docs/provider-adaptation.md)。
+
+## 独立翻译 API
+
+初始翻译可单独选择 **火山引擎、DeepL、Azure Translator、自托管 LibreTranslate**，也可继续用通用 LLM。专用 API 生成中文，通用 LLM 负责句子映射和英文回写。服务额度、配置步骤与模块设计见 [翻译服务说明](docs/translation-services.md)。免费额度取决于账号方案，云端 LLM 的映射和回写可能另行计费。
 
 ## 数据与格式边界
 

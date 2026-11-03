@@ -48,7 +48,7 @@ def geometry(pdf: Path, paragraphs, original=False, language="en"):
         if not original and p.get('deleted'): continue
         if original and p.get('inserted'): continue
         text = p.get('originalEn' if original else 'en', '')
-        if language == 'zh' and not original: text = p.get('zh') or p.get('en', '')
+        if language == 'zh' and not original and p.get('translationPolicy') != 'skip_reference': text = p.get('zh') or p.get('en', '')
         eligible.append((p, normalized(text)))
     counts = Counter(text for _, text in eligible)
     unmapped = []
@@ -81,13 +81,13 @@ def geometry(pdf: Path, paragraphs, original=False, language="en"):
         unit_pages = defaultdict(list)
         raw = p.get('originalEn' if original else 'en', '')
         units = p.get('originalUnits' if original else 'units', [])
-        if language == 'zh' and not original:
+        if language == 'zh' and not original and p.get('translationPolicy') != 'skip_reference':
             raw = p.get('zh') or p.get('en', '')
             units = p.get('targetUnits', []) if p.get('zh') else []
         # Every unit must exactly cover its source range. Unknown/obsolete units
         # downgrade to paragraph mapping, never search for a repeated sentence.
         cursor = 0
-        valid = bool(units)
+        valid = bool(units) and p.get('translationPolicy') != 'skip_reference'
         for unit in units:
             lo, hi = unit.get('start'), unit.get('end')
             if not isinstance(lo, int) or not isinstance(hi, int) or lo != cursor or hi <= lo or hi > len(raw) or raw[lo:hi] != unit.get('text'):
@@ -127,7 +127,7 @@ def native_layout(pdf: Path, paragraphs, cache: Path, revision: int, original=Fa
     if not target.exists(): atomic_write(target, data)
     # Layout is independent of project bookkeeping revision, but sentence IDs,
     # offsets and correspondence groups must invalidate its semantic overlay.
-    fields = ('id', 'originalEn', 'en', 'zh', 'inserted', 'deleted', 'units', 'originalUnits', 'targetUnits', 'groups')
+    fields = ('id', 'originalEn', 'en', 'zh', 'inserted', 'deleted', 'units', 'originalUnits', 'targetUnits', 'groups', 'translationPolicy')
     signature = {'original': original, 'language': language,
         'paragraphs': [{k:p.get(k) for k in fields} for p in paragraphs]}
     geometry_key = sha256(VERSION + json.dumps(signature, ensure_ascii=False, sort_keys=True, separators=(',', ':')).encode('utf-8')).hexdigest()

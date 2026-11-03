@@ -22,13 +22,23 @@ if source:
     if not config['operations']:assert export.content==source.read_bytes()
 # Scan only non-ignored repository files; do not print credential values.
 files=subprocess.check_output(['git','ls-files','--cached','--others','--exclude-standard','-z'],cwd=ROOT).decode().split('\0')
-secret_file=ROOT/'.data/secrets.json'
-secrets=json.loads(secret_file.read_text('utf-8-sig')) if secret_file.exists() else {};hits=[]
+def secret_values(value):
+    if isinstance(value,str):
+        if len(value)>8:yield value
+    elif isinstance(value,dict):
+        for item in value.values():yield from secret_values(item)
+    elif isinstance(value,list):
+        for item in value:yield from secret_values(item)
+secrets=[]
+for secret_name in ('secrets.json','translation-secrets.json'):
+    secret_file=ROOT/'.data'/secret_name
+    if secret_file.exists():secrets.extend(secret_values(json.loads(secret_file.read_text('utf-8-sig'))))
+hits=[]
 for relative in filter(None,files):
     path=ROOT/relative
     if path.is_file():
         data=path.read_bytes()
-        if any(value.encode() in data for value in secrets.values() if value):hits.append(relative)
+        if any(value.encode() in data for value in secrets):hits.append(relative)
 assert not hits,'Credential present in non-ignored source files'
 result={'health':health,'demoProjectId':demo['id'],'paragraphs':len(demo['paragraphs']),
     'tableParagraphs':sum(p['container']=='table' for p in demo['paragraphs']),

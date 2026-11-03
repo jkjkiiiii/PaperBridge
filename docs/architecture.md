@@ -4,7 +4,12 @@
 flowchart LR
   Word[Original DOCX] --> Package[ZIP/XML text and structure index]
   Package --> State[Versioned project state]
-  State --> Model[Provider-specific LLM adapter]
+  State --> Router[Translation router]
+  Router --> MT[Dedicated translation service]
+  MT --> Model[LLM alignment of fixed texts]
+  Router --> Model
+  State --> Rewrite[LLM local rewrite]
+  Rewrite --> Validate
   Model --> Validate[Schema and allowed-edit validation]
   Validate --> State
   State --> Patch[Minimal DOCX text patches]
@@ -35,3 +40,7 @@ PDFs, page PNGs, geometry and browser snapshots are cached. Dirty projects can s
 ## Validation boundaries
 
 Normal tests cover deterministic document, state, API and protocol behavior. Native Word rendering is optional and local. A real-model demo verifies a selected workflow, not general translation accuracy. Cloud adapter tests use mocked responses unless explicit user credentials are configured.
+
+## Translation boundary
+
+Dedicated MT engines implement a common text-list adapter; LLM protocols remain separate. Credentials live in an independent ignored secret store. Paragraph translation, fixed-text LLM mapping and constrained English rewrite have distinct responsibilities. Full retranslation pins both public translation settings and LLM settings; failed mapping explicitly degrades to a coarse paragraph group. See [translation services](translation-services.md).

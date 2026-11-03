@@ -1,0 +1,73 @@
+{
+  "schemaVersion": "1.0",
+  "date": "2026-11-04",
+  "paper": {
+    "title": "Attention Is All You Need",
+    "source": "https://arxiv.org/src/1706.03762",
+    "inputSha256": "0a0a3d7e900ad71b877f3271bf8405f18cbe266255e14bd2fb2740cc0d232002",
+    "document": "Editable reconstruction; not official Word or pixel-identical TeX layout"
+  },
+  "baseline": {
+    "scope": "Volcengine Chinese initial translation plus DeepSeek Flash fixed-text alignment; excludes English rewrites, image-internal text and footnotes",
+    "model": "deepseek-flash",
+    "thinking": false,
+    "deepseekRequests": 178,
+    "tokens": {
+      "promptTokens": 91124,
+      "completionTokens": 7858,
+      "totalTokens": 98982,
+      "cacheHitTokens": 0,
+      "cacheMissTokens": 91124
+    },
+    "rmbPublishedPriceCalculation": "0.12255600",
+    "rmbDashboardApproximate": 0.12,
+    "dashboardEvidence": "User-confirmed approximate dashboard consumption; no public billing screenshot",
+    "machineTranslationRequests": 178,
+    "machineTranslationCharacters": 27490,
+    "machineTranslationFree": "Conditional on remaining monthly free quota; not verified",
+    "completed": 346,
+    "failed": 0,
+    "referenceEntriesSkipped": 40,
+    "referenceHeadingSkipped": 1,
+    "referenceRequests": 0,
+    "alignmentFallbackParagraphs": 2,
+    "elapsedSecondsApproximate": 351
+  },
+  "alignmentRecheck": {
+    "scope": "Same two paragraphs; fixed text, no machine translation",
+    "requests": 2,
+    "tokens": {
+      "promptTokens": 2188,
+      "completionTokens": 236,
+      "totalTokens": 2424,
+      "cacheHitTokens": 256,
+      "cacheMissTokens": 1932
+    },
+    "rmbPublishedPriceCalculation": "0.00288112",
+    "results": [
+      {
+        "topic": "Convolutional complexity",
+        "groups": [
+          "1:1",
+          "1:1",
+          "1:1",
+          "1:1",
+          "1:1"
+        ],
+        "method": "llm",
+        "englishUnchanged": true,
+        "chineseUnchanged": true
+      },
+      {
+        "topic": "English-to-French results",
+        "groups": [
+          "2:1"
+        ],
+        "method": "llm",
+        "englishUnchanged": true,
+        "chineseUnchanged": true
+      }
+    ]
+  },
+  "quality": "Raw MT has terminology errors; structural checks are not semantic accuracy evaluation."
+}

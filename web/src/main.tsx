@@ -65,11 +65,14 @@ type Paragraph = {
     protected: boolean;
     text: string;
   }[];
-  modelMeta?: { model: string; seconds: number };
+  modelMeta?: { model: string; seconds: number; alignmentWarning?: string; alignmentNotes?: string[]; alignmentMethod?: string; translationService?: {id:string;kind:string} };
+  mappingSource?: string;
+  translationPolicy?: "translate" | "skip_reference";
+  skipReason?: string;
 };
 type LayoutNode = { type: "paragraph"; id: string; style?: React.CSSProperties } | { type: "table"; id?: string; columnWidths?: number[]; rows: { cells: { omitted?: boolean; colSpan?: number; rowSpan?: number; style?: React.CSSProperties; blocks: LayoutNode[] }[] }[] };
 type Project = {
-  retranslation?: {status:string;total:number;completed:number;failed:number;model:string;error?:string;stopRequested?:boolean};
+  retranslation?: {status:string;total:number;completed:number;failed:number;skipped?:number;model:string;error?:string;stopRequested?:boolean};
   layout?: LayoutNode[];
   id: string;
   name: string;
@@ -429,7 +432,7 @@ function App() {
     try {
       for (const p of project.paragraphs) {
         if (batchStop.current) break;
-        if (p.deleted || p.zh || !p.en.trim()) continue;
+        if (p.deleted || p.translationPolicy === "skip_reference" || p.zh || !p.en.trim()) continue;
         await model(p, "translate_align");
       }
     } finally {
@@ -448,7 +451,7 @@ function App() {
       if (source.paragraphs.some(p => !p.deleted && (!["ready", "untranslated"].includes(p.status) || p.draftZh !== p.zh))) {
         throw Error("请先完成、重试或撤销待回写内容，再重新翻译全文。");
       }
-      if (!window.confirm("将使用当前已同步的英文创建新的重译版本，按当前已保存的模型设置重新翻译全文并重建句子映射。原项目、译文和编辑记录保留。是否开始？")) return;
+      if (!window.confirm("将使用当前已同步的英文创建新的重译版本，按当前选择的翻译服务生成全文中文，再用通用模型重建句子映射。原项目、译文和编辑记录保留。是否开始？")) return;
       const next = await api<Project>(`/projects/${sourceId}/retranslate`, {});
       setProject(next); projectRef.current = next;
       setDrafts({}); draftRef.current = {}; setEditing(""); setSelection(null); setHover(null);
@@ -535,7 +538,7 @@ function App() {
   function isMapped(p: Paragraph) {
 
   return (
-      p.status === "ready" && drafts[p.id] === undefined && !working.has(p.id)
+      p.translationPolicy !== "skip_reference" && p.status === "ready" && drafts[p.id] === undefined && !working.has(p.id)
     );
   }
   function targets(p: Paragraph, side: string) {
@@ -587,6 +590,7 @@ function App() {
     if (ids.length) setSelection({ pid: p.id, side, ids: [...new Set(ids)] });
   }
   function textView(p: Paragraph, side: "en" | "zh") {
+    if (p.translationPolicy === "skip_reference") return p.en;
     const text = side === "en" ? (original ? p.originalEn : p.en) : p.zh;
     const units =
       side === "en"
@@ -833,7 +837,7 @@ function App() {
     }
   }
   const ready =
-      project?.paragraphs.filter((p) => p.status === "ready" && !p.deleted)
+      project?.paragraphs.filter((p) => p.status === "ready" && !p.deleted && p.translationPolicy !== "skip_reference")
         .length || 0,
     pending =
       project?.paragraphs.filter(
@@ -842,13 +846,13 @@ function App() {
     function renderParagraph(p: Paragraph, i: number, side: "en" | "zh", style?: React.CSSProperties) {
                     const running = working.has(p.id) || p.status === "running",
                       canMap = isMapped(p),
-                      isEditing = editing === p.id && side === "zh";
+                      isEditing = editing === p.id && side === "zh" && p.translationPolicy !== "skip_reference";
                     return (
                       <section
                         key={p.id}
                         data-block={p.id}
                         style={style}
-                        onDoubleClick={() => { if(side === "zh" && !p.deleted && p.status !== "untranslated") setEditing(p.id); }}
+                        onDoubleClick={() => { if(side === "zh" && !p.deleted && p.status !== "untranslated" && p.translationPolicy !== "skip_reference") setEditing(p.id); }}
                         className={`paragraph ${active === p.id ? "active" : ""} ${p.deleted ? "deleted-block" : ""}`}
                         onMouseDown={() => {
                           setActive(p.id);
@@ -857,6 +861,9 @@ function App() {
                         onMouseUp={(e) => onSelection(p, side, e)}
                       >
                         <div className="paragraph-inner">
+                          {side === "zh" && p.modelMeta?.alignmentWarning && p.mappingSource !== "manual" && <div className="translation-alignment-warning" role="status">{p.modelMeta.alignmentWarning}</div>}
+                          {side === "zh" && p.modelMeta?.alignmentNotes?.map((note, i) => <div key={i} className="translation-alignment-warning" role="status">对应关系提示：{note}</div>)}
+                          {side === "zh" && p.modelMeta?.translationService && <small className="translation-provenance">译文：{p.modelMeta.model} · 对应：{p.mappingSource === "manual" ? "人工修复映射" : p.modelMeta.alignmentMethod === "llm" ? "LLM 句子映射" : "段落级对应"}</small>}
                           <div className="paragraph-label">
                             <span>
                               ¶ {String(i + 1).padStart(2, "0")}{" "}
@@ -897,6 +904,8 @@ function App() {
                                 </span>
                               )}
                             </div>
+                          ) : p.translationPolicy === "skip_reference" ? (
+                            <div className="paragraph-text reference-preserved"><small>参考文献 · 保留英文，不翻译或匹配</small><div>{p.en}</div><button onClick={() => act(p,"translation_policy",{policy:"translate"})}>识别有误？纳入翻译</button></div>
                           ) : p.status === "untranslated" ? (
                             <div className="untranslated">
                               <span>译文将在这里与英文逐段对应</span>
@@ -985,7 +994,7 @@ function App() {
                               )}
                             </>
                           )}
-                          {side === "zh" && (
+                          {side === "zh" && p.translationPolicy !== "skip_reference" && (
                             <div className="paragraph-tools">
                               {!p.deleted && p.status !== "untranslated" && (
                                 <>
@@ -1041,6 +1050,7 @@ function App() {
                               >
                                 <Undo2 size={14} />
                               </button>
+                              <button title="将本段识别为参考文献并跳过翻译和匹配" disabled={running || p.deleted} onClick={()=>act(p,"translation_policy",{policy:"skip_reference"})}>跳过参考文献</button>
                               <button
                                 title="重做"
                                 onClick={() => act(p, "redo")}
@@ -1250,7 +1260,7 @@ function App() {
                   本地项目
                 </span>
                 <span>
-                  {ready} / {project.paragraphs.length} 段已同步
+                  {ready} / {project.paragraphs.filter(p=>!p.deleted && p.translationPolicy !== "skip_reference").length} 段已同步 · {project.paragraphs.filter(p=>p.translationPolicy === "skip_reference").length} 段参考文献保留
                 </span>
                 {pending > 0 && (
                   <span className="warning-text">{pending} 段待处理</span>
@@ -1334,7 +1344,7 @@ function App() {
             </div>
             {project.retranslation && <div className="retranslation-progress" role="status">
               <strong>全文重译 · {project.retranslation.status === "running" ? (project.retranslation.stopRequested ? "完成当前段后暂停" : "翻译中") : project.retranslation.status === "stopping" ? "完成当前段后暂停" : project.retranslation.status === "completed" ? "已完成" : project.retranslation.status === "completed_with_errors" ? "已结束，部分段落需重试" : "已暂停／待处理"}</strong>
-              <span>{project.retranslation.completed} / {project.retranslation.total} 段 · {project.retranslation.failed} 段失败 · {project.retranslation.model}</span>
+              <span>{project.retranslation.completed} / {project.retranslation.total} 段 · {project.retranslation.skipped || 0} 段参考文献跳过 · {project.retranslation.failed} 段失败 · {project.retranslation.model}</span>
               {["running", "stopping"].includes(project.retranslation.status) ? <button disabled={project.retranslation.status === "stopping" || project.retranslation.stopRequested} onClick={() => retranslationAction("stop")}>暂停后续</button> : project.retranslation.status !== "completed" && <button onClick={() => retranslationAction("resume")}>继续／重试未完成</button>}
               {project.retranslation.error && <span className="warning-text">{project.retranslation.error}</span>}
             </div>}
@@ -1371,7 +1381,7 @@ function App() {
                 >
                   {nativeView ? <NativePages stateKey={project.paragraphs.map(p=>`${p.id}:${p.revision}:${p.status}`).join("|")} projectId={project.id} revision={project.revision} original={side === "en" && original} language={side} active={active} editing={editing} highlighted={(selection || hover)?.pid || null} onSelect={(id) => {
                     scrollOwner.current = null; setActive(id); const p = project.paragraphs.find(p => p.id === id);
-                    if (p && !p.deleted && p.status !== "untranslated") setEditing(id);
+                    if (p && !p.deleted && p.status !== "untranslated" && p.translationPolicy !== "skip_reference") setEditing(id);
                   }} onHover={(id, unit) => {
                     const p = project.paragraphs.find(p => p.id === id);
                     if (!selection) setHover(p && isMapped(p) && !(side === "en" && original && p.en !== p.originalEn) ? {pid:p.id,side,ids:unit ? [unit] : (side === "en" ? p.units : p.targetUnits).map(u=>u.id)} : null);
